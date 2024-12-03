@@ -4,3 +4,7 @@ export * from './Title';
 export * from './Categories';
 export * from './SortPopup';
 export * from './TopBar';
+export * from './Filters';
+export * from './Filters';
+export * from './RangeSlider';
+export * from './CheckboxFiltersGroup';

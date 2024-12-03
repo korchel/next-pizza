@@ -11,7 +11,7 @@ interface ITopBarProps {
 export const TopBar: FC<ITopBarProps> = ({ className}) => {
   return (
     <div className={cn(className, 'sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-10')}>
-      <Container className="mt-10">
+      <Container>
         <Categories />
         <SortPopup />
       </Container>
