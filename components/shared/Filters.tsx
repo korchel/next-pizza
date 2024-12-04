@@ -4,6 +4,7 @@ import { Title } from "./Title";
 import { FilterCheckbox } from "./FilterCheckbox";
 import { Input } from "../ui";
 import { RangeSlider } from "./RangeSlider";
+import { CheckboxFiltersGroup } from "./CheckboxFiltersGroup";
 
 interface IFiltersProps {
   className?: string;
@@ -20,12 +21,98 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
       <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
         <p>Price from to</p>
         <div className="flex gap-3 mb-5">
-          <Input type="number" placeholder="0" min={0} max={1000} defaultValue={0} />
+          <Input
+            type="number"
+            placeholder="0"
+            min={0}
+            max={1000}
+            defaultValue={0}
+          />
           <Input type="number" placeholder="30000" min={100} max={30000} />
         </div>
         <RangeSlider min={0} max={5000} step={10} value={[0, 5000]} />
-        
       </div>
+      <CheckboxFiltersGroup
+        title="ingeridents"
+        className="mt-5"
+        limit={6}
+        defaultItems={[
+          {
+            text: "Сырный соус",
+            value: "1",
+          },
+          {
+            text: "Моццарелла",
+            value: "2",
+          },
+          {
+            text: "Чеснок",
+            value: "3",
+          },
+          {
+            text: "Солённые огурчики",
+            value: "4",
+          },
+          {
+            text: "Красный лук",
+            value: "5",
+          },
+          {
+            text: "Томаты",
+            value: "6",
+          },
+        ]}
+        items={[
+          {
+            text: "Сырный соус",
+            value: "1",
+          },
+          {
+            text: "Моццарелла",
+            value: "2",
+          },
+          {
+            text: "Чеснок",
+            value: "3",
+          },
+          {
+            text: "Солённые огурчики",
+            value: "4",
+          },
+          {
+            text: "Красный лук",
+            value: "5",
+          },
+          {
+            text: "Томаты",
+            value: "6",
+          },
+          {
+            text: "Сырный соус",
+            value: "1",
+          },
+          {
+            text: "Моццарелла",
+            value: "2",
+          },
+          {
+            text: "Чеснок",
+            value: "3",
+          },
+          {
+            text: "Солённые огурчики",
+            value: "4",
+          },
+          {
+            text: "Красный лук",
+            value: "5",
+          },
+          {
+            text: "Томаты",
+            value: "6",
+          },
+        ]}
+      />
     </div>
   );
 };
