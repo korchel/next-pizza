@@ -1,10 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { api } from "@/services/apiClient";
+import { Product } from "@prisma/client";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { FC, useRef, useState } from "react";
-import { useClickAway } from "react-use";
+import { ChangeEventHandler, FC, useRef, useState } from "react";
+import { useClickAway, useDebounce } from "react-use";
 
 interface Props {
   className?: string;
@@ -13,10 +15,29 @@ interface Props {
 export const SearchInput: FC<Props> = ({ className }) => {
   const [focused, setFocused] = useState(false);
   const ref = useRef(null);
+  const [query, setQuery] = useState('');
+  const [products, setProducts] = useState<Product[]>([])
 
   useClickAway(ref, () => {
     setFocused(false);
   });
+
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const handleOnClick = () => {
+    setFocused(false);
+    setQuery('');
+    setProducts([]);
+  };
+
+  useDebounce(() => {
+    api.products.search(query).then((items) => {
+      setProducts(items);
+    })
+  }, 200, [query]);
+
   return (
     <>
       {focused && <div className="fixed inset-0 bg-black/50 z-30" />}
@@ -33,25 +54,34 @@ export const SearchInput: FC<Props> = ({ className }) => {
           type="text"
           placeholder="Найти пиццу..."
           onFocus={() => setFocused(true)}
+          value={query}
+          onChange={handleOnChange}
         />
-        <div
+        {products.length > 0 && <div
           className={cn(
             "absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30",
             focused && "visible opacity-100 top-12"
           )}
         >
-          <Link
-            href="/product/1"
-            className="flex items-center gap-3 px-3 py-3 hover:bg-primary/10"
-          >
-            <img
-              src="https://media.dodostatic.net/image/r:292x292/11EF9C1DAAFCF3529A62947B9522A8FE.avif"
-              className="h-8 w-8 rounded"
-              alt="pizza 1"
-            />
-            <span>Product</span>
-          </Link>
-        </div>
+          {
+            products.map((product) => (
+              <Link
+                href={`/product/${product.id}`}
+                className="flex items-center gap-3 px-3 py-3 hover:bg-primary/10"
+                key={product.id}
+                onClick={handleOnClick}
+              >
+                <img
+                  src={product.imageUrl}
+                  className="h-8 w-8 rounded"
+                  alt={product.name}
+                />
+                <span>{product.name}</span>
+              </Link>
+            ))
+          }
+          
+        </div>}
       </div>
     </>
   );
