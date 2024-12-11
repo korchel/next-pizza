@@ -33,9 +33,12 @@ export const SearchInput: FC<Props> = ({ className }) => {
   };
 
   useDebounce(() => {
-    api.products.search(query).then((items) => {
+    api.products
+      .search(query)
+      .then((items) => {
       setProducts(items);
-    })
+      })
+      .catch((error) => console.error(error));
   }, 200, [query]);
 
   return (

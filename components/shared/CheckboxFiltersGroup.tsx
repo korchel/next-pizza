@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { ChangeEventHandler, FC, useState } from "react";
 import { FilterCheckbox, IFilterChecboxProps } from "./FilterCheckbox";
-import { Input } from "../ui";
+import { Input, Skeleton } from "../ui";
 
 type Item = IFilterChecboxProps;
 
@@ -13,8 +13,10 @@ interface ICheckboxFiltersGroup {
   defaultItems: Item[];
   limit?: number;
   placeholder?: string;
-  onChange?: (values: string[]) => void;
+  onCheck?: (id: string) => void;
   className?: string;
+  loading: boolean;
+  selectedIds?: Set<string>; 
 }
 
 export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroup> = ({
@@ -22,12 +24,15 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroup> = ({
   items,
   defaultItems,
   limit = 5,
-  onChange,
+  loading,
   placeholder = "Search...",
+  onCheck,
   className,
+  selectedIds,
 }) => {
   const [showAll, setShowAll] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+
 
   const list = showAll
     ? items.filter((item) =>
@@ -38,7 +43,19 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroup> = ({
   const onChangeSearch: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearchValue(e.target.value);
   };
-
+  if (loading) {
+    return (
+      <div className={cn(className)}>
+        <p className="font-bold mb-3">{title}</p>
+        {
+          Array(limit).fill(0).map((_, index) => (
+            <Skeleton key={index} className="h-6 mb-4 rounded-[8px]" />
+          ))
+        }
+        <Skeleton className="w-28 h-6 mb-4 rounded-[8px]" />
+      </div>
+    );
+  }
   return (
     <div className={cn(className)}>
       <p className="font-bold mb-3">{title}</p>
@@ -58,8 +75,8 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroup> = ({
             text={item.text}
             value={item.value}
             endAdornment={item.endAdornment}
-            checked={false}
-            onCheckedChange={(ids) => console.log(ids)}
+            checked={selectedIds?.has(item.value)}
+            onCheckedChange={() => onCheck?.(item.value)}
           />
         ))}
       </div>
