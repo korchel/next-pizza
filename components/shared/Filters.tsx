@@ -1,14 +1,13 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import qs from "qs";
 import { Title } from "./Title";
 import { Input } from "../ui";
 import { RangeSlider } from "./RangeSlider";
 import { CheckboxFiltersGroup } from "./CheckboxFiltersGroup";
-import { useFilterIngredients } from "@/hooks/useFilterIngredients";
-import { useSet } from "react-use";
+import { useGetIngredients } from "@/hooks/useGetIngredients";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface IFiltersProps {
@@ -16,47 +15,54 @@ interface IFiltersProps {
 }
 
 interface IPriceRange {
-  from?: number;
-  to?: number;
+  from: number;
+  to: number;
 }
 
 export const Filters: FC<IFiltersProps> = ({ className }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  console.log(searchParams);
+  const chosenPriceRange = { from: searchParams?.get('from'), to: searchParams?.get('to') };
+  const chosenPizzaTypes = new Set(searchParams?.get('pizzaTypes')?.split(','));
+  const chosenPizzaSizes = new Set(searchParams?.get('pizzaSizes')?.split(','));
+  const chosenIngredientIds = new Set(searchParams?.get('ingredients')?.split(','));
 
-  const [pizzaTypes, { toggle: togglePizzaType }] = useSet<string>(new Set([]));
-  const [sizes, { toggle: toggleSizes }] = useSet<string>(new Set([]));
-  const { ingredients, loading, onAddId, selectedIngredientIds } =
-    useFilterIngredients();
-  const [priceRange, setPriceRange] = useState<IPriceRange>({});
-
-  const items = ingredients.map((ingredient) => ({
+  const { ingredients, loading } = useGetIngredients();
+  const displayIngredients = ingredients.map((ingredient) => ({
     value: String(ingredient.id),
     text: ingredient.name,
   }));
 
-  const changePriceRange = (name: keyof IPriceRange, value: number) => {
-    setPriceRange({
-      ...priceRange,
-      [name]: value,
-    });
+  const changePriceRange = (key: keyof IPriceRange, value: number) => {
+    const newPriceRange = { ...chosenPriceRange, [key]: String(value) };
+    const query = getCurrentQuery(newPriceRange, chosenPizzaTypes, chosenPizzaSizes, chosenIngredientIds);
+    router.push(`/?${query}`, { scroll: false });
   };
 
-  useEffect(() => {
-    const currentFilters = {
-      ...priceRange,
-      pizzaTypes: Array.from(pizzaTypes),
-      sizes: Array.from(sizes),
-      ingredients: Array.from(selectedIngredientIds),
-    };
-    const query = qs.stringify(currentFilters, {
-      arrayFormat: "comma",
-      skipNulls: true,
-    });
+  const onSliderMove = ([from, to]: number[]) => {
+    const newPriceRange = { from: String(from), to: String(to) };
+    const query = getCurrentQuery(newPriceRange, chosenPizzaTypes, chosenPizzaSizes, chosenIngredientIds);
     router.push(`/?${query}`, { scroll: false });
-  }, [priceRange, pizzaTypes, selectedIngredientIds, sizes]);
+  };
+
+  const onTogglePizzaType = (value: string) => {
+    const newPizzaTypes = toggleSet(chosenPizzaTypes, value);
+    const query = getCurrentQuery(chosenPriceRange, newPizzaTypes, chosenPizzaSizes, chosenIngredientIds);
+    router.push(`/?${query}`, { scroll: false });
+  }
+
+  const onTogglePizzaSize = (value: string) => {
+    const newPizzaSizes = toggleSet(chosenPizzaSizes, value);
+    const query = getCurrentQuery(chosenPriceRange, chosenPizzaTypes, newPizzaSizes, chosenIngredientIds);
+    router.push(`/?${query}`, { scroll: false });
+  };
+
+  const onToggleIngredient = (value: string) => {
+    const newIngredientIds = toggleSet(chosenIngredientIds, value);
+    const query = getCurrentQuery(chosenPriceRange, chosenPizzaTypes, chosenPizzaSizes, newIngredientIds);
+    router.push(`/?${query}`, { scroll: false });
+  };
 
   return (
     <div className={cn(className)}>
@@ -65,24 +71,24 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
         name="pizzaTypes"
         title="Pizza types"
         className="mb-5"
-        selected={pizzaTypes}
+        selected={chosenPizzaTypes || []}
         items={[
           { text: "Thin", value: "1" },
           { text: "Traditional", value: "2" },
         ]}
-        onCheck={togglePizzaType}
+        onCheck={onTogglePizzaType}
       />
       <CheckboxFiltersGroup
         name="sizes"
         title="Sizes"
         className="mb-5"
-        selected={sizes}
+        selected={chosenPizzaSizes}
         items={[
           { text: "20cm", value: "20" },
           { text: "30cm", value: "30" },
           { text: "40cm", value: "40" },
         ]}
-        onCheck={toggleSizes}
+        onCheck={onTogglePizzaSize}
       />
       <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
         <p>Price from to</p>
@@ -93,7 +99,7 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
             min={0}
             max={1000}
             defaultValue={0}
-            value={priceRange.from}
+            value={chosenPriceRange.from || 0}
             onChange={(e) => changePriceRange("from", +e.target.value)}
           />
           <Input
@@ -101,7 +107,7 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
             placeholder="1000"
             min={100}
             max={1000}
-            value={priceRange.to}
+            value={chosenPriceRange.to || 1000}
             onChange={(e) => changePriceRange("to", +e.target.value)}
           />
         </div>
@@ -109,8 +115,8 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
           min={0}
           max={1000}
           step={10}
-          value={[priceRange.from || 0, priceRange.to || 1000]}
-          onValueChange={([from, to]) => setPriceRange({ from, to })}
+          value={[+(chosenPriceRange.from || 0), +(chosenPriceRange.to || 1000)]}
+          onValueChange={onSliderMove}
         />
       </div>
       <CheckboxFiltersGroup
@@ -118,12 +124,41 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
         title="ingeridents"
         className="mt-5"
         limit={6}
-        defaultItems={items.slice(0, 6)}
-        items={items}
+        defaultItems={displayIngredients.slice(0, 6)}
+        items={displayIngredients}
         loading={loading}
-        onCheck={onAddId}
-        selected={selectedIngredientIds}
+        onCheck={onToggleIngredient}
+        selected={chosenIngredientIds}
       />
     </div>
   );
 };
+
+const getCurrentQuery = (
+  priceRange: { from: string | null, to: string | null },
+  pizzaTypes: Set<string>,
+  sizes: Set<string>,
+  chosenIngredientIds: Set<string>
+) => {
+  const currentFilters = {
+    ...priceRange,
+    pizzaTypes: Array.from(pizzaTypes),
+    pizzaSizes: Array.from(sizes),
+    ingredients: Array.from(chosenIngredientIds),
+  };
+  const query = qs.stringify(currentFilters, {
+    arrayFormat: "comma",
+    skipNulls: true,
+  });
+  return query;
+}
+
+const toggleSet = (set: Set<string>, value: string): Set<string> => {
+  const newSet = new Set(set);
+  if (set.has(value)) {
+      newSet.delete(value);
+    } else {
+      newSet.add(value);
+  }
+  return newSet;
+}
