@@ -1,13 +1,13 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
 import qs from "qs";
 import { Title } from "./Title";
 import { Input } from "../ui";
 import { RangeSlider } from "./RangeSlider";
 import { CheckboxFiltersGroup } from "./CheckboxFiltersGroup";
-import { useGetIngredients } from "@/hooks/useGetIngredients";
+import { useGetIngredients } from "@/shared/hooks/useGetIngredients";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface IFiltersProps {

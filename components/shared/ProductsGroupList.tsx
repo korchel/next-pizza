@@ -1,11 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import { FC, useEffect, useRef } from "react";
 import { useIntersection } from "react-use";
 import { Title } from "./Title";
 import { ProductCard } from "./ProductCard";
-import { useCategoryStore } from "@/store/category";
+import { useCategoryStore } from "@/shared/store/category";
 
 interface IProductsGroupListProps {
   title: string;
