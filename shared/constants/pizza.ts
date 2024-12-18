@@ -1,10 +1,10 @@
-const sizesMap = {
+export const sizesMap = {
   20: 'small',
   30: 'medium',
   40: 'large',
 } as const;
 
-const typesMap = {
+export const typesMap = {
   1: 'traditional',
   2: 'thin',
 } as const;
