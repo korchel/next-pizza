@@ -1,12 +1,12 @@
 import { cn } from "@/shared/lib/utils";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useSet } from "react-use";
 
 import { PizzaImage } from "./PizzaImage";
 import { Title } from "./Title";
 import { Button } from "../ui";
 import { PizzaTypeSelector } from "./PizzaTypeSelector";
-import { PizzaSize, pizzaSizes, PizzaType, pizzaTypes } from "@/shared/constants/pizza";
+import { PizzaSize, pizzaSizes, PizzaType, pizzaTypes, typesMap } from "@/shared/constants/pizza";
 import { Ingredient, ProductVariant } from "@prisma/client";
 import { IngredientTag } from "./IngredientTag";
 
@@ -38,14 +38,35 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
     .reduce((acc, ingredient) => acc + ingredient.price, 0);
   const totalPrice = pizzaPrice + ingredientsPrice;
 
+  const availablePizzas = variants.filter((variant) => variant.pizzaType === type);
+  const availableSizes = pizzaSizes.map(({name, value}) => ({
+    name,
+    value,
+    disabled: !availablePizzas.some((type) => type.size === Number(value))
+  }))
+
+  const handleClick = () => {
+
+  }
+
+  useEffect(() => {
+    const isCurrentSizeAvailable = availableSizes
+      .find((availableSize) => Number(availableSize.value) === size && !availableSize.disabled);
+    const availableSize = availableSizes
+      .find((availableSize) => !availableSize.disabled);
+    if (!isCurrentSizeAvailable && availableSize) {
+      setSize(Number(availableSize.value) as PizzaSize);
+    }
+  }, [type]);
+
   return (
     <div className={cn(className, 'flex flex-1')}>
       <PizzaImage imageUrl={imageUrl} size={size} />
       <div className="w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
-        <p className="text-gray-400">30 cm traditional</p>
+        <p className="text-gray-400">{`${size} cm, ${typesMap[type]}`}</p>
         <PizzaTypeSelector
-          items={pizzaSizes}
+          items={availableSizes}
           selectedValue={String(size)}
           onClick={(value) => setSize(Number(value) as PizzaSize)}
         />
@@ -69,7 +90,7 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
         </div>
         </div>
         
-        <Button className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10" onClick={addToCart}>
+        <Button className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10" onClick={handleClick}>
           Add to cart for {totalPrice}
         </Button>
       </div>
