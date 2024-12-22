@@ -6,7 +6,7 @@ export * from "./Header";
 export * from "./modals/ProductModal";
 export * from "./PizzaImage";
 export * from "./ProductForm";
-export * from "./ProuctImage";
+export * from "./ProductImage";
 export * from "./PizzaTypeSelector";
 export * from "./RangeSlider";
 export * from "./SearchInput";

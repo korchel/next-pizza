@@ -6,7 +6,7 @@ interface IProuctImageProps {
   imageUrl: string;
 }
 
-export const ProuctImage: FC<IProuctImageProps> = ({ className, imageUrl }) => {
+export const ProductImage: FC<IProuctImageProps> = ({ className, imageUrl }) => {
   return (
     <div className={cn(className, 'flex items-center justify-center flex-1 relative w-[350px] h-[350px]')}>
         <img

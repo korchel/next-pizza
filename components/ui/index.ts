@@ -5,5 +5,6 @@ export * from './Drawer';
 export * from './Input';
 export * from './Popover';
 export * from './Select';
+export * from './Sheet';
 export * from './Skeleton';
 export * from './Slider';

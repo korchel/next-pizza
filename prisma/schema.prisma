@@ -113,7 +113,7 @@ model Cart {
 
   token String
 
-  totalAmount Int @default(0)
+  totalCost Int @default(0)
 
   items  CartItem[]
 
@@ -147,7 +147,7 @@ model Order {
   token String
 
   status      OrderStatus @default(PENDING)
-  totalAmount Int
+  totalCost Int
   paymentId   String?
   items Json
 
