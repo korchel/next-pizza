@@ -11,7 +11,7 @@ type Type = {
 
 interface IPizzaTypeSelectorProps {
   items: readonly Type[];
-  onClick: (value: Type["value"]) => void;
+  onClick?: (value: Type["value"]) => void;
   selectedValue: Type["value"];
   className?: string;
 }

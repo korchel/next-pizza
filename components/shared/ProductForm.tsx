@@ -2,7 +2,7 @@ import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
 import { Title } from "./Title";
 import { Button } from "../ui";
-import { ProuctImage } from "./ProuctImage";
+import { ProductImage } from "./ProductImage";
 
 interface IProductFormProps {
   imageUrl: string;
@@ -20,7 +20,7 @@ export const ProductForm: FC<IProductFormProps> = ({
   const details = '30 cm traditional';
   return (
     <div className={cn(className, 'flex flex-1')}>
-      <ProuctImage imageUrl={imageUrl} />
+      <ProductImage imageUrl={imageUrl} />
       <div className="w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
         <p className="text-gray-400">{details}</p>
