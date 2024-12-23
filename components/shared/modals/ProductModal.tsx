@@ -6,6 +6,7 @@ import { FC } from "react";
 import { useRouter } from "next/navigation";
 import { ProductForm } from "../ProductForm";
 import { PizzaForm } from "../PizzaForm";
+import { useCartStore } from "@/shared/store";
 
 interface IProductModalProps {
   product: Product & { variants: ProductVariant[]; ingredients: Ingredient[] };
@@ -14,8 +15,23 @@ interface IProductModalProps {
 
 export const ProductModal: FC<IProductModalProps> = ({ product }) => {
   const router = useRouter();
+  const { addCartItem } = useCartStore(state => state);
 
+  const productVariant = product.variants[0];
   const isPizza = product.categoryId === 1;
+
+  const addProduct = () => {
+    addCartItem({
+      productVariantId: productVariant.id,
+    });
+  };
+
+  const addPizza = (productVariantId: number, ingredients: number[]) => {
+    addCartItem({
+      itemsId: productVariantId,
+      ingredients,
+    })
+  };
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -26,10 +42,15 @@ export const ProductModal: FC<IProductModalProps> = ({ product }) => {
             name={product.name}
             ingredients={product.ingredients}
             variants={product.variants}
-            addToCart={() => { }}
+            addToCart={addPizza}
           />
         ) : (
-          <ProductForm imageUrl={product.imageUrl} name={product.name} addToCart={() => {}} />
+            <ProductForm
+              imageUrl={product.imageUrl}
+              name={product.name}
+              addToCart={addProduct}
+              price={productVariant.price}
+            />
         )}
       </DialogContent>
       

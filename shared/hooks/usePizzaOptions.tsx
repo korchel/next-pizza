@@ -15,6 +15,7 @@ interface IReturnType {
   size: PizzaSize;
   selectedIngredients: Set<number>;
   availableSizes: SizeVariant[];
+  currentItemId: number | undefined;
   setSize: (size: PizzaSize) => void;
   setType: (type: PizzaType) => void;
   addIngredient: (id: number) => void;
@@ -28,6 +29,8 @@ export const usePizzaOptions = (variants: ProductVariant[]): IReturnType => {
   );
 
   const availableSizes = getAvailablePizzaSizes(variants, type);
+
+  const currentItemId = variants.find((variant) => variant.pizzaType === type && variant.size === size)?.id;
 
   useEffect(() => {
     const isCurrentSizeAvailable = availableSizes.find(
@@ -47,6 +50,7 @@ export const usePizzaOptions = (variants: ProductVariant[]): IReturnType => {
     size,
     selectedIngredients,
     availableSizes,
+    currentItemId,
     setSize,
     setType,
     addIngredient,

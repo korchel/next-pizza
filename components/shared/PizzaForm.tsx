@@ -23,7 +23,7 @@ interface IPizzaFormProps {
   name: string;
   ingredients: Ingredient[];
   variants: ProductVariant[];
-  addToCart: VoidFunction;
+  addToCart: (itemId: number, ingredients: number[]) => void;
   className?: string;
 }
 
@@ -40,6 +40,7 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
     size,
     selectedIngredients,
     availableSizes,
+    currentItemId,
     setSize,
     setType,
     addIngredient,
@@ -53,7 +54,11 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
     selectedIngredients
   );
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    if (currentItemId) {
+      addToCart(currentItemId, Array.from(selectedIngredients));
+    }
+  };
 
   return (
     <div className={cn(className, "flex flex-1")}>
