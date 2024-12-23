@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { cn } from "@/shared/lib/utils";
 import { FC, PropsWithChildren, useEffect } from "react";
@@ -23,18 +23,26 @@ interface ICartDrawerProps {
   className?: string;
 }
 
-export const CartDrawer: FC<PropsWithChildren<ICartDrawerProps>> = ({ children, className }) => {
-  const { totalCost, items, fetchCartItems, updateItemQuantity } = useCartStore((state) => state);
+export const CartDrawer: FC<PropsWithChildren<ICartDrawerProps>> = ({
+  children,
+  className,
+}) => {
+  const { totalCost, items, getCartItems, updateItemQuantity, removeCartItem } =
+    useCartStore((state) => state);
 
-  const updateQuantity = (id: number, quantity: number, type: 'plus' | 'minus') => {
-    const updatedQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
+  const updateQuantity = (
+    id: number,
+    quantity: number,
+    type: "plus" | "minus"
+  ) => {
+    const updatedQuantity = type === "plus" ? quantity + 1 : quantity - 1;
     updateItemQuantity(id, updatedQuantity);
   };
 
   useEffect(() => {
-    fetchCartItems();
+    getCartItems();
   }, []);
-  
+
   return (
     <div className={cn(className)}>
       <Sheet>
@@ -52,12 +60,19 @@ export const CartDrawer: FC<PropsWithChildren<ICartDrawerProps>> = ({ children, 
                 key={item.id}
                 imageUrl={item.imageUrl}
                 id={item.id}
-                details={getCartItemDetails(item.pizzaType as PizzaType, item.pizzaSize as PizzaSize, item.ingredients)}
+                details={getCartItemDetails(
+                  item.pizzaType as PizzaType,
+                  item.pizzaSize as PizzaSize,
+                  item.ingredients
+                )}
                 name={item.name}
                 price={item.price}
                 quantity={item.quantity}
-                clickCounter={(type) => updateQuantity(item.id, item.quantity, type)}
+                clickCounter={(type) =>
+                  updateQuantity(item.id, item.quantity, type)
+                }
                 className="mb-2"
+                removeItem={() => removeCartItem(item.id)}
               />
             ))}
           </div>
@@ -71,16 +86,10 @@ export const CartDrawer: FC<PropsWithChildren<ICartDrawerProps>> = ({ children, 
                 </div>
                 <div className="font-bold text-lg">{totalCost}p</div>
               </div>
-              <Link href='/cart'>
-                <Button
-                  type="submit"
-                  className="w-full h-12 text-base"
-                >
+              <Link href="/cart">
+                <Button type="submit" className="w-full h-12 text-base">
                   Order
-                  <ArrowRight
-                    size={20}
-                    className="ml-2"
-                  />
+                  <ArrowRight size={20} className="ml-2" />
                 </Button>
               </Link>
             </div>
