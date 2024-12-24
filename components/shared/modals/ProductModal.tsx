@@ -18,28 +18,18 @@ export const ProductModal: FC<IProductModalProps> = ({ product }) => {
   const router = useRouter();
   const { addCartItem, loading } = useCartStore((state) => state);
 
-  const productVariant = product.variants[0];
   const isPizza = product.categoryId === 1;
 
-  const addProduct = () => {
-    addCartItem({
-      productVariantId: productVariant.id,
-    });
-  };
-
-  const addPizza = async (productVariantId: number, ingredients: number[]) => {
+  const onSubmit = async (productVariantId?: number, ingredients?: number[]) => {
     try {
-      await addCartItem({
-        productVariantId,
-        ingredients,
-      });
-      toast.success("Pizza added to cart");
+      await addCartItem({ productVariantId, ingredients });
+      toast.success("Item added to cart");
       router.back();
     } catch (error) {
-      toast.error("Failed to add pizza to cart");
+      toast.error("Failed to add item to cart");
       console.error(error);
     }
-  };
+  }
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -50,15 +40,15 @@ export const ProductModal: FC<IProductModalProps> = ({ product }) => {
             name={product.name}
             ingredients={product.ingredients}
             variants={product.variants}
-            addToCart={addPizza}
+            addToCart={onSubmit}
             loading={loading}
           />
         ) : (
           <ProductForm
             imageUrl={product.imageUrl}
             name={product.name}
-            addToCart={addProduct}
-            price={productVariant.price}
+            addToCart={() => onSubmit(product.variants[0].id)}
+            price={product.variants[0].price}
             loading={loading}
           />
         )}

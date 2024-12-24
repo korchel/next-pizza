@@ -23,7 +23,7 @@ interface IPizzaFormProps {
   name: string;
   ingredients: Ingredient[];
   variants: ProductVariant[];
-  addToCart: (itemId: number, ingredients: number[]) => void;
+  addToCart: (itemId: number, ingredients?: number[]) => void;
   loading: boolean;
   className?: string;
 }

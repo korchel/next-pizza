@@ -7,7 +7,7 @@ import { ProductImage } from "./ProductImage";
 interface IProductFormProps {
   imageUrl: string;
   name: string;
-  addToCart: VoidFunction;
+  addToCart: () => void;
   className?: string;
   price: number;
   loading: boolean;
@@ -21,6 +21,7 @@ export const ProductForm: FC<IProductFormProps> = ({
   price,
   loading,
 }) => {
+
   return (
     <div className={cn(className, "flex flex-1")}>
       <ProductImage imageUrl={imageUrl} />
