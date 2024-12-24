@@ -24,6 +24,7 @@ interface IPizzaFormProps {
   ingredients: Ingredient[];
   variants: ProductVariant[];
   addToCart: (itemId: number, ingredients: number[]) => void;
+  loading: boolean;
   className?: string;
 }
 
@@ -33,6 +34,7 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
   ingredients,
   variants,
   addToCart,
+  loading,
   className,
 }) => {
   const {
@@ -92,6 +94,7 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
         </div>
 
         <Button
+          loading={loading}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
           onClick={handleClick}
         >

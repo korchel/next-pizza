@@ -10,6 +10,7 @@ interface IProductFormProps {
   addToCart: VoidFunction;
   className?: string;
   price: number;
+  loading: boolean;
 }
 
 export const ProductForm: FC<IProductFormProps> = ({
@@ -17,18 +18,23 @@ export const ProductForm: FC<IProductFormProps> = ({
   name,
   addToCart,
   className,
-  price
+  price,
+  loading,
 }) => {
   return (
-    <div className={cn(className, 'flex flex-1')}>
+    <div className={cn(className, "flex flex-1")}>
       <ProductImage imageUrl={imageUrl} />
       <div className="w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
 
-        <Button onClick={addToCart} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
+        <Button
+          loading={loading}
+          onClick={addToCart}
+          className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
+        >
           Buy for {price}
         </Button>
       </div>
     </div>
-  )
+  );
 };
