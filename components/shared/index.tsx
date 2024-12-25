@@ -1,17 +1,15 @@
-export * from "./Categories";
-export * from "./CheckboxFiltersGroup";
+export * from "./topBar/Categories";
+export * from "./filters/CheckboxFiltersGroup";
 export * from "./Container";
-export * from "./Filters";
-export * from "./Header";
+export * from "./filters/Filters";
+export * from "./header/Header";
 export * from "./modals/ProductModal";
 export * from "./PizzaImage";
 export * from "./ProductForm";
 export * from "./ProductImage";
 export * from "./PizzaTypeSelector";
-export * from "./RangeSlider";
+export * from "./filters/RangeSlider";
 export * from "./SearchInput";
-export * from "./SortPopup";
+export * from "./topBar/SortPopup";
 export * from "./Title";
-export * from "./TopBar";
-
-
+export * from "./topBar/TopBar";

@@ -1,11 +1,11 @@
 import { cn } from "@/shared/lib/utils";
 import React, { FC } from "react";
-import { Container } from "./Container";
+import { Container } from "../Container";
 import Image from "next/image";
-import { Button } from "../ui";
+import { Button } from "../../ui";
 import { User } from "lucide-react";
 import Link from "next/link";
-import { SearchInput } from "./SearchInput";
+import { SearchInput } from "../SearchInput";
 import { CartButton } from "./CartButton";
 
 interface IHeaderProps {
@@ -13,8 +13,6 @@ interface IHeaderProps {
 }
 
 export const Header: FC<IHeaderProps> = ({ className }) => {
-
-
   return (
     <header className={cn("border border-b", className)}>
       <Container className="flex items-center justify-between py-8">
