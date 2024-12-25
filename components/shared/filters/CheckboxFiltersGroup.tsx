@@ -3,7 +3,7 @@
 import { cn } from "@/shared/lib/utils";
 import { ChangeEventHandler, FC, useState } from "react";
 import { FilterCheckbox, IFilterChecboxProps } from "./FilterCheckbox";
-import { Input, Skeleton } from "../ui";
+import { Input, Skeleton } from "../../ui";
 
 type Item = IFilterChecboxProps;
 

@@ -3,8 +3,8 @@
 import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
 import qs from "qs";
-import { Title } from "./Title";
-import { Input } from "../ui";
+import { Title } from "../Title";
+import { Input } from "../../ui";
 import { RangeSlider } from "./RangeSlider";
 import { CheckboxFiltersGroup } from "./CheckboxFiltersGroup";
 import { useGetIngredients } from "@/shared/hooks/useGetIngredients";
@@ -23,10 +23,15 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const chosenPriceRange = { from: searchParams?.get('from'), to: searchParams?.get('to') };
-  const chosenPizzaTypes = new Set(searchParams?.get('pizzaTypes')?.split(','));
-  const chosenPizzaSizes = new Set(searchParams?.get('pizzaSizes')?.split(','));
-  const chosenIngredientIds = new Set(searchParams?.get('ingredients')?.split(','));
+  const chosenPriceRange = {
+    from: searchParams?.get("from"),
+    to: searchParams?.get("to"),
+  };
+  const chosenPizzaTypes = new Set(searchParams?.get("pizzaTypes")?.split(","));
+  const chosenPizzaSizes = new Set(searchParams?.get("pizzaSizes")?.split(","));
+  const chosenIngredientIds = new Set(
+    searchParams?.get("ingredients")?.split(",")
+  );
 
   const { ingredients, loading } = useGetIngredients();
   const displayIngredients = ingredients.map((ingredient) => ({
@@ -36,31 +41,56 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
 
   const changePriceRange = (key: keyof IPriceRange, value: number) => {
     const newPriceRange = { ...chosenPriceRange, [key]: String(value) };
-    const query = getCurrentQuery(newPriceRange, chosenPizzaTypes, chosenPizzaSizes, chosenIngredientIds);
+    const query = getCurrentQuery(
+      newPriceRange,
+      chosenPizzaTypes,
+      chosenPizzaSizes,
+      chosenIngredientIds
+    );
     router.push(`/?${query}`, { scroll: false });
   };
 
   const onSliderMove = ([from, to]: number[]) => {
     const newPriceRange = { from: String(from), to: String(to) };
-    const query = getCurrentQuery(newPriceRange, chosenPizzaTypes, chosenPizzaSizes, chosenIngredientIds);
+    const query = getCurrentQuery(
+      newPriceRange,
+      chosenPizzaTypes,
+      chosenPizzaSizes,
+      chosenIngredientIds
+    );
     router.push(`/?${query}`, { scroll: false });
   };
 
   const onTogglePizzaType = (value: string) => {
     const newPizzaTypes = toggleSet(chosenPizzaTypes, value);
-    const query = getCurrentQuery(chosenPriceRange, newPizzaTypes, chosenPizzaSizes, chosenIngredientIds);
+    const query = getCurrentQuery(
+      chosenPriceRange,
+      newPizzaTypes,
+      chosenPizzaSizes,
+      chosenIngredientIds
+    );
     router.push(`/?${query}`, { scroll: false });
-  }
+  };
 
   const onTogglePizzaSize = (value: string) => {
     const newPizzaSizes = toggleSet(chosenPizzaSizes, value);
-    const query = getCurrentQuery(chosenPriceRange, chosenPizzaTypes, newPizzaSizes, chosenIngredientIds);
+    const query = getCurrentQuery(
+      chosenPriceRange,
+      chosenPizzaTypes,
+      newPizzaSizes,
+      chosenIngredientIds
+    );
     router.push(`/?${query}`, { scroll: false });
   };
 
   const onToggleIngredient = (value: string) => {
     const newIngredientIds = toggleSet(chosenIngredientIds, value);
-    const query = getCurrentQuery(chosenPriceRange, chosenPizzaTypes, chosenPizzaSizes, newIngredientIds);
+    const query = getCurrentQuery(
+      chosenPriceRange,
+      chosenPizzaTypes,
+      chosenPizzaSizes,
+      newIngredientIds
+    );
     router.push(`/?${query}`, { scroll: false });
   };
 
@@ -115,7 +145,10 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
           min={0}
           max={1000}
           step={10}
-          value={[+(chosenPriceRange.from || 0), +(chosenPriceRange.to || 1000)]}
+          value={[
+            +(chosenPriceRange.from || 0),
+            +(chosenPriceRange.to || 1000),
+          ]}
           onValueChange={onSliderMove}
         />
       </div>
@@ -135,15 +168,15 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
 };
 
 const getCurrentQuery = (
-  priceRange: { from: string | null, to: string | null },
+  priceRange: { from: string | null; to: string | null },
   pizzaTypes: Set<string>,
-  sizes: Set<string>,
+  pizzaSizes: Set<string>,
   chosenIngredientIds: Set<string>
 ) => {
   const currentFilters = {
     ...priceRange,
     pizzaTypes: Array.from(pizzaTypes),
-    pizzaSizes: Array.from(sizes),
+    pizzaSizes: Array.from(pizzaSizes),
     ingredients: Array.from(chosenIngredientIds),
   };
   const query = qs.stringify(currentFilters, {
@@ -151,14 +184,14 @@ const getCurrentQuery = (
     skipNulls: true,
   });
   return query;
-}
+};
 
 const toggleSet = (set: Set<string>, value: string): Set<string> => {
   const newSet = new Set(set);
   if (set.has(value)) {
-      newSet.delete(value);
-    } else {
-      newSet.add(value);
+    newSet.delete(value);
+  } else {
+    newSet.add(value);
   }
   return newSet;
-}
+};

@@ -20,7 +20,10 @@ export const ProductModal: FC<IProductModalProps> = ({ product }) => {
 
   const isPizza = product.categoryId === 1;
 
-  const onSubmit = async (productVariantId?: number, ingredients?: number[]) => {
+  const onSubmit = async (
+    productVariantId?: number,
+    ingredients?: number[]
+  ) => {
     try {
       await addCartItem({ productVariantId, ingredients });
       toast.success("Item added to cart");
@@ -29,7 +32,7 @@ export const ProductModal: FC<IProductModalProps> = ({ product }) => {
       toast.error("Failed to add item to cart");
       console.error(error);
     }
-  }
+  };
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
