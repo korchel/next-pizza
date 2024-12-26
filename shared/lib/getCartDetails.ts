@@ -7,10 +7,11 @@ export type ICartItem = {
   name: string;
   imageUrl: string;
   price: number;
+  disabled: boolean;
   pizzaSize?: number | null;
   pizzaType?: number | null;
   ingredients: { name: string; price: number }[];
-}
+};
 
 interface ICartDetails {
   items: ICartItem[];
@@ -24,15 +25,15 @@ export const getCartDetails = (data: CartDTO): ICartDetails => {
     name: item.productVariant.product.name,
     imageUrl: item.productVariant.product.imageUrl,
     price: getCartItemPrice(item),
+    disabled: false,
     pizzaSize: item.productVariant.size,
     pizzaType: item.productVariant.pizzaType,
-    ingredients: item.ingredients.map(({name, price}) => ({name, price})),
+    ingredients: item.ingredients.map(({ name, price }) => ({ name, price })),
   }));
 
-
-  const {totalCost} = data;
+  const { totalCost } = data;
   return {
     totalCost,
     items,
-  }
+  };
 };

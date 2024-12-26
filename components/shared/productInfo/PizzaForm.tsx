@@ -3,10 +3,10 @@
 import { cn } from "@/shared/lib";
 import { FC } from "react";
 
-import { PizzaImage } from "./PizzaImage";
-import { Title } from "./Title";
-import { Button } from "../ui";
-import { PizzaTypeSelector } from "./PizzaTypeSelector";
+import { PizzaImage } from "../PizzaImage";
+import { Title } from "../Title";
+import { Button } from "../../ui";
+import { PizzaTypeSelector } from "../PizzaTypeSelector";
 import {
   PizzaSize,
   PizzaType,
@@ -14,7 +14,7 @@ import {
   typesMap,
 } from "@/shared/constants/pizza";
 import { Ingredient, ProductVariant } from "@prisma/client";
-import { IngredientTag } from "./IngredientTag";
+import { IngredientTag } from "../IngredientTag";
 import { calcPizzaPrice } from "@/shared/lib";
 import { usePizzaOptions } from "@/shared/hooks";
 
