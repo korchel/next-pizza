@@ -1,8 +1,8 @@
 import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
-import { Title } from "./Title";
-import { Button } from "../ui";
-import { ProductImage } from "./ProductImage";
+import { Title } from "../Title";
+import { Button } from "../../ui";
+import { ProductImage } from "../ProductImage";
 
 interface IProductFormProps {
   imageUrl: string;
@@ -21,7 +21,6 @@ export const ProductForm: FC<IProductFormProps> = ({
   price,
   loading,
 }) => {
-
   return (
     <div className={cn(className, "flex flex-1")}>
       <ProductImage imageUrl={imageUrl} />
