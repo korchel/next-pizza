@@ -9,12 +9,18 @@ import { SearchInput } from "../SearchInput";
 import { CartButton } from "./CartButton";
 
 interface IHeaderProps {
+  hasCart?: boolean;
+  hasSearch?: boolean;
   className?: string;
 }
 
-export const Header: FC<IHeaderProps> = ({ className }) => {
+export const Header: FC<IHeaderProps> = ({
+  hasCart = true,
+  hasSearch = true,
+  className,
+}) => {
   return (
-    <header className={cn("border border-b", className)}>
+    <header className={cn("border-b", className)}>
       <Container className="flex items-center justify-between py-8">
         <div className="flex items-center gap-4">
           <Image src="/logo.png" alt="logo" width={35} height={35} />
@@ -27,17 +33,21 @@ export const Header: FC<IHeaderProps> = ({ className }) => {
             </div>
           </Link>
         </div>
-        <div className="mx-10 flex-1">
-          <SearchInput />
-        </div>
+        {hasSearch && (
+          <div className="mx-10 flex-1">
+            <SearchInput />
+          </div>
+        )}
         <div className="flex items-center gap-3">
           <Button className="flex items-center gap-1" variant="outline">
             <User size={16} />
             Выйти
           </Button>
-          <div>
-            <CartButton />
-          </div>
+          {hasCart && (
+            <div>
+              <CartButton />
+            </div>
+          )}
         </div>
       </Container>
     </header>

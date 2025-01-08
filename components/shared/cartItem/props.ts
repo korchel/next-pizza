@@ -5,5 +5,5 @@ export interface ICartItemProps {
   name: string;
   price: number;
   quantity: number;
-  disabled: boolean;
+  disabled?: boolean;
 }

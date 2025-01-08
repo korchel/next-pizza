@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/shared/lib/utils";
-import { FC, PropsWithChildren, useEffect } from "react";
+import { FC, PropsWithChildren } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -17,21 +17,13 @@ import {
 } from "@/components/ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CartDrawerItem } from "./CartDrawerItem";
-import { useCartStore } from "@/shared/store";
 import { getCartItemDetails } from "@/shared/lib";
 import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
 import { Title } from "../Title";
+import { useCart } from "@/shared/hooks";
 
-interface ICartDrawerProps {
-  className?: string;
-}
-
-export const CartDrawer: FC<PropsWithChildren<ICartDrawerProps>> = ({
-  children,
-  className,
-}) => {
-  const { totalCost, items, getCartItems, updateItemQuantity, removeCartItem } =
-    useCartStore((state) => state);
+export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
+  const { totalCost, items, updateItemQuantity, removeCartItem } = useCart();
 
   const updateQuantity = (
     id: number,
@@ -42,12 +34,8 @@ export const CartDrawer: FC<PropsWithChildren<ICartDrawerProps>> = ({
     updateItemQuantity(id, updatedQuantity);
   };
 
-  useEffect(() => {
-    getCartItems();
-  }, []);
-
   return (
-    <div className={cn(className)}>
+    <div>
       <Sheet>
         <SheetTrigger asChild>{children}</SheetTrigger>
         <SheetContent

@@ -1,5 +1,8 @@
 export * from "./topBar/Categories";
 export * from "./filters/CheckboxFiltersGroup";
+export * from "./checkout/CheckoutItem";
+export * from "./checkout/CheckoutItemSkeleton";
+export * from "./checkout/CheckoutTotalItem";
 export * from "./Container";
 export * from "./filters/Filters";
 export * from "./header/Header";
@@ -14,3 +17,4 @@ export * from "./SearchInput";
 export * from "./topBar/SortPopup";
 export * from "./Title";
 export * from "./topBar/TopBar";
+export * from "./WhiteBlock";
