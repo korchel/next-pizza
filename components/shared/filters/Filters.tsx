@@ -128,7 +128,6 @@ export const Filters: FC<IFiltersProps> = ({ className }) => {
             placeholder="0"
             min={0}
             max={1000}
-            defaultValue={0}
             value={chosenPriceRange.from || 0}
             onChange={(e) => changePriceRange("from", +e.target.value)}
           />

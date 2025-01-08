@@ -43,18 +43,32 @@ export async function POST(req: NextRequest) {
   try {
     let token = req.cookies.get("cartToken")?.value;
     const data = (await req.json()) as CreateCartItemDTO;
-
     if (!token) {
       token = crypto.randomUUID();
     }
 
     const cart = await findOrCreateCart(token);
-    const existingCartItem = await prisma.cartItem.findFirst({
+
+    // workaround to find cart items with posted ingredients
+
+    const existingCartItems = await prisma.cartItem.findMany({
       where: {
         cartId: cart.id,
         productVariantId: data.productVariantId,
-        ingredients: { every: { id: { in: data.ingredients } } },
       },
+      include: {
+        ingredients: true,
+      }
+    });
+
+    const existingCartItem = existingCartItems.find((cartItem) => {
+      if (data.ingredients.length > 0) {
+        if (cartItem.ingredients.length > 0) {
+          return cartItem.ingredients.every((ingredient) => data.ingredients.includes(ingredient.id));
+        }
+        return false;
+      }
+      return true;
     });
 
     if (existingCartItem) {
