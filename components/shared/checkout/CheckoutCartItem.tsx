@@ -14,7 +14,7 @@ interface Props extends ICartItemProps {
   className?: string;
 }
 
-export const CheckoutItem: React.FC<Props> = ({
+export const CheckoutCartItem: React.FC<Props> = ({
   name,
   price,
   imageUrl,

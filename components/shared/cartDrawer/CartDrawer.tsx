@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/shared/lib/utils";
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -24,6 +24,7 @@ import { useCart } from "@/shared/hooks";
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
   const { totalCost, items, updateItemQuantity, removeCartItem } = useCart();
+  const [redirecting, setRedirecting] = useState(false);
 
   const updateQuantity = (
     id: number,
@@ -108,8 +109,13 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                     </div>
                     <div className="font-bold text-lg">{totalCost}p</div>
                   </div>
-                  <Link href="/cart">
-                    <Button type="submit" className="w-full h-12 text-base">
+                  <Link href="/checkout">
+                    <Button
+                      onClick={() => setRedirecting(true)}
+                      loading={redirecting}
+                      type="submit"
+                      className="w-full h-12 text-base"
+                    >
                       Order
                       <ArrowRight size={20} className="ml-2" />
                     </Button>
