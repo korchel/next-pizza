@@ -3,7 +3,7 @@ import { FC, ReactNode } from "react";
 
 interface Props {
   title: ReactNode;
-  value: number;
+  value: ReactNode;
   className?: string;
 }
 
@@ -14,7 +14,7 @@ export const CheckoutTotalItem: FC<Props> = ({ title, value, className }) => {
         {title}:
         <div className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
       </div>
-      <span className="font-bold">{value} p</span>
+      <span className="font-bold">{value}</span>
     </div>
   );
 };

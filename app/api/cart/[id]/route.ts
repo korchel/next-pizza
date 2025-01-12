@@ -10,7 +10,7 @@ export async function PATCH(
     const id = Number(params.id);
     const data = (await req.json()) as { quantity: number };
     const token = req.cookies.get("cartToken")?.value;
-    console.log(id, "!!!!!!!!!!");
+
     if (!token) {
       return NextResponse.json({ error: "Cart token not found" });
     }
