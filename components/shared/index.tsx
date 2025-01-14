@@ -24,3 +24,4 @@ export * from "./topBar/SortPopup";
 export * from "./Title";
 export * from "./topBar/TopBar";
 export * from "./WhiteBlock";
+export * from "./Providers";
