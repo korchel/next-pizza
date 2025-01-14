@@ -1,10 +1,15 @@
-import { cn } from "@/shared/lib/utils";
-import React, { FC } from "react";
-import { Container } from "../Container";
+"use client";
+
+import { FC, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 import Image from "next/image";
-import { Button } from "../../ui";
 import { User } from "lucide-react";
 import Link from "next/link";
+
+import { cn } from "@/shared/lib/utils";
+import { Container } from "../Container";
+import { Button } from "../../ui";
 import { SearchInput } from "../SearchInput";
 import { CartButton } from "./CartButton";
 
@@ -19,6 +24,17 @@ export const Header: FC<IHeaderProps> = ({
   hasSearch = true,
   className,
 }) => {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    console.log("!!!!!");
+    if (searchParams.has("paid")) {
+      setTimeout(() => {
+        toast.success("Order has been paid! Info sent by e-mail");
+      });
+    }
+  }, []);
+
   return (
     <header className={cn("border-b", className)}>
       <Container className="flex items-center justify-between py-8">

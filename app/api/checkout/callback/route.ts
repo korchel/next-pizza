@@ -31,12 +31,17 @@ export async function POST(req: NextRequest) {
           : OrderStatus.CANCELLED,
       },
     });
-    const items = order.items as unknown as CartItemDTO[];
-    await sendEmail(
-      order.email,
-      "Nxet pizza | Success",
-      OrderSucessTemplate({ orderId: order.id, items })
-    );
+    const items = JSON.parse(order.items as string) as CartItemDTO[];
+
+    if (isPaymentSucceeded) {
+      await sendEmail(
+        order.email,
+        "Nxet pizza | Success",
+        OrderSucessTemplate({ orderId: order.id, items })
+      );
+    } else {
+      //send email about failed payment
+    }
   } catch (error) {
     console.log("Checkout callback error", error);
     return NextResponse.json({ error: "Srver Error" });
