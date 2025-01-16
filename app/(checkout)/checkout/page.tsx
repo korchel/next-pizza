@@ -1,0 +1,96 @@
+"use client";
+
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import {
+  CheckoutSidebar,
+  Container,
+  Title,
+  CheckoutCart,
+  CheckoutPersonalDataForm,
+  CheckoutAddressForm,
+} from "@/components/shared";
+import { useCart } from "@/shared/hooks";
+import {
+  CheckoutFormType,
+  checkoutSchema,
+} from "@/components/shared/checkout/checkoutSchema";
+import { cn } from "@/shared/lib";
+import { createOrder } from "@/app/actions";
+import toast from "react-hot-toast";
+import { useState } from "react";
+
+export default function CheckoutPage() {
+  const [submitting, setSubmitting] = useState(false);
+  const { totalCost, items, updateItemQuantity, removeCartItem, loading } =
+    useCart();
+
+  const form = useForm<CheckoutFormType>({
+    resolver: zodResolver(checkoutSchema),
+    defaultValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      address: "",
+      comment: "",
+    },
+  });
+
+  const updateQuantity = (
+    id: number,
+    quantity: number,
+    type: "plus" | "minus"
+  ) => {
+    const updatedQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+    updateItemQuantity(id, updatedQuantity);
+  };
+
+  const onSubmit: SubmitHandler<CheckoutFormType> = async (data) => {
+    try {
+      setSubmitting(true);
+      const url = await createOrder(data);
+      toast.success("Order created");
+      if (url) {
+        location.href = url;
+      }
+    } catch (error) {
+      setSubmitting(false);
+      toast.error("Failed to create order");
+      console.error(error);
+    }
+  };
+
+  return (
+    <Container className="mt-10">
+      <Title text="Order" size="lg" className="font-extrabold mb-8" />
+      <FormProvider {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex gap-10">
+            <div className="flex flex-col gap-10 flex-1 mb-20">
+              <CheckoutCart
+                items={items}
+                removeCartItem={removeCartItem}
+                updateQuantity={updateQuantity}
+                loading={loading}
+              />
+              <CheckoutPersonalDataForm
+                className={cn(loading && "opacity-35 pointer-events-none")}
+              />
+              <CheckoutAddressForm
+                className={cn(loading && "opacity-35 pointer-events-none")}
+              />
+            </div>
+            <div className="w-[450px]">
+              <CheckoutSidebar
+                totalCost={totalCost}
+                loading={loading || submitting}
+              />
+            </div>
+          </div>
+        </form>
+      </FormProvider>
+    </Container>
+  );
+}
