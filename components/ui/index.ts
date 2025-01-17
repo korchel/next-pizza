@@ -1,7 +1,7 @@
 export * from "./Button";
 export * from "./Checkbox";
 export * from "./ClearButton";
-export * from "./Dialog";
+export * as Dialog from "./Dialog";
 export * from "./Drawer";
 export * from "./ErrorText";
 export * from "./Input";

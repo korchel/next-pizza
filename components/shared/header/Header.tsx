@@ -1,17 +1,17 @@
 "use client";
 
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
-import { User } from "lucide-react";
 import Link from "next/link";
 
 import { cn } from "@/shared/lib/utils";
 import { Container } from "../Container";
-import { Button } from "../../ui";
 import { SearchInput } from "../SearchInput";
 import { CartButton } from "./CartButton";
+import { ProfileButton } from "./ProfileButton";
+import { AuthModal } from "../modals/authModal";
 
 interface IHeaderProps {
   hasCart?: boolean;
@@ -25,9 +25,9 @@ export const Header: FC<IHeaderProps> = ({
   className,
 }) => {
   const searchParams = useSearchParams();
+  const [isSigninModalOpen, setSigninModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log("!!!!!");
     if (searchParams.has("paid")) {
       setTimeout(() => {
         toast.success("Order has been paid! Info sent by e-mail");
@@ -55,10 +55,7 @@ export const Header: FC<IHeaderProps> = ({
           </div>
         )}
         <div className="flex items-center gap-3">
-          <Button className="flex items-center gap-1" variant="outline">
-            <User size={16} />
-            Выйти
-          </Button>
+          <ProfileButton openModal={() => setSigninModalOpen(true)} />
           {hasCart && (
             <div>
               <CartButton />
@@ -66,6 +63,10 @@ export const Header: FC<IHeaderProps> = ({
           )}
         </div>
       </Container>
+      <AuthModal
+        isOpen={isSigninModalOpen}
+        close={() => setSigninModalOpen(false)}
+      />
     </header>
   );
 };
