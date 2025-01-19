@@ -1,5 +1,6 @@
-import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
+
+import { cn } from "@/shared/lib/utils";
 import { Title } from "../Title";
 import { Button } from "../../ui";
 import { ProductImage } from "../ProductImage";

@@ -1,5 +1,6 @@
-import { CircleUser, Link, User } from "lucide-react";
+import { CircleUser, User } from "lucide-react";
 import { FC } from "react";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui";

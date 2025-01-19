@@ -7,12 +7,7 @@ import { PizzaImage } from "../PizzaImage";
 import { Title } from "../Title";
 import { Button } from "../../ui";
 import { PizzaTypeSelector } from "../PizzaTypeSelector";
-import {
-  PizzaSize,
-  PizzaType,
-  pizzaTypes,
-  typesMap,
-} from "@/shared/constants/pizza";
+import { PizzaSize, PizzaType, pizzaTypes, typesMap } from "@/shared/constants";
 import { Ingredient, ProductVariant } from "@prisma/client";
 import { IngredientTag } from "../IngredientTag";
 import { calcPizzaPrice } from "@/shared/lib";

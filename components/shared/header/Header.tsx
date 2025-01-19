@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,11 +26,23 @@ export const Header: FC<IHeaderProps> = ({
 }) => {
   const searchParams = useSearchParams();
   const [isSigninModalOpen, setSigninModalOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
+    let toastMessage = "";
+
     if (searchParams.has("paid")) {
+      toastMessage = "Order has been paid! Info sent by e-mail";
+    }
+    if (searchParams.has("verified")) {
+      toastMessage = "E-mail verified";
+    }
+    if (toastMessage) {
+      router.replace("/");
       setTimeout(() => {
-        toast.success("Order has been paid! Info sent by e-mail");
+        toast.success(toastMessage, {
+          icon: "✅",
+        });
       });
     }
   }, []);

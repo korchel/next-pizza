@@ -14,9 +14,11 @@ export * from "./filters/Filters";
 export * from "./header/Header";
 export * from "./modals/ProductModal";
 export * from "./PizzaImage";
+
 export * from "./productInfo/ProductForm";
 export * from "./ProductImage";
-export * from "./productInfo/ProductInfo";
+export { ProductInfo } from "./productInfo/ProductInfo";
+export { ProfileForm } from "./ProfileForm";
 export * from "./PizzaTypeSelector";
 export * from "./filters/RangeSlider";
 export * from "./SearchInput";
@@ -25,3 +27,5 @@ export * from "./Title";
 export * from "./topBar/TopBar";
 export * from "./WhiteBlock";
 export * from "./Providers";
+
+export { InfoBlock } from "./InfoBlock";

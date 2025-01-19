@@ -1,6 +1,6 @@
 import { Button, Dialog } from "@/components/ui";
 import { signIn } from "next-auth/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 
@@ -11,13 +11,20 @@ interface Props {
 }
 
 export const AuthModal: FC<Props> = ({ isOpen, close }) => {
+  const [formType, setFormType] = useState<"login" | "register">("login");
+
   const handleClose = () => {
     close();
   };
+
+  const onSwitchType = () => {
+    setFormType(formType === "login" ? "register" : "login");
+  };
+
   return (
     <Dialog.Dialog open={isOpen} onOpenChange={handleClose}>
       <Dialog.DialogContent className="w-[450px] bg-white p-10">
-        {type === "login" ? (
+        {formType === "login" ? (
           <LoginForm close={handleClose} />
         ) : (
           <RegisterForm close={handleClose} />
@@ -68,7 +75,7 @@ export const AuthModal: FC<Props> = ({ isOpen, close }) => {
           type="button"
           className="h-12"
         >
-          {type !== "login" ? "Войти" : "Регистрация"}
+          {formType !== "login" ? "Enter" : "Register"}
         </Button>
       </Dialog.DialogContent>
     </Dialog.Dialog>

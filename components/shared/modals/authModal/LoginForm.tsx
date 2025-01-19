@@ -4,7 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { loginSchema, TLoginValues } from "./schemas";
 import { Button } from "@/components/ui";
-import { FormInput } from "../../checkout/form";
+import { FormInput } from "../../form";
 import { Title } from "../../Title";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
@@ -31,11 +31,15 @@ export const LoginForm: FC<Props> = ({ close }) => {
       if (!response?.ok) {
         throw Error();
       }
-      toast.success("Logged in");
+      toast.success("Logged in", {
+        icon: "✅",
+      });
       close();
     } catch (error) {
-      console.error("Login error", error);
-      toast.error("Login failed");
+      console.error("LOGIN ERROR", error);
+      toast.error("Login failed", {
+        icon: "❌",
+      });
     }
   };
 
@@ -53,7 +57,7 @@ export const LoginForm: FC<Props> = ({ close }) => {
             </p>
           </div>
           <img
-            src="/assets/images/phone-icon.png"
+            src="/assets/phone-icon.png"
             alt="phone-icon"
             width={60}
             height={60}
