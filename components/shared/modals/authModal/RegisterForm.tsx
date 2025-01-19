@@ -12,10 +12,9 @@ import { Button } from "@/components/ui";
 
 interface Props {
   close: VoidFunction;
-  onClickLogin: VoidFunction;
 }
 
-export const RegisterForm: React.FC<Props> = ({ close, onClickLogin }) => {
+export const RegisterForm: React.FC<Props> = ({ close }) => {
   const form = useForm<TRegisterValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {

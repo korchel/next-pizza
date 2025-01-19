@@ -22,6 +22,7 @@ export { ProfileForm } from "./ProfileForm";
 export * from "./PizzaTypeSelector";
 export * from "./filters/RangeSlider";
 export * from "./SearchInput";
+export { Stories } from "./Stories";
 export * from "./topBar/SortPopup";
 export * from "./Title";
 export * from "./topBar/TopBar";
