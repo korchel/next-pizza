@@ -1,13 +1,14 @@
 "use client";
 
-import { cn } from "@/shared/lib/utils";
 import { ChangeEventHandler, FC, useState } from "react";
+
+import { cn } from "@/shared/lib/utils";
 import { FilterCheckbox, IFilterChecboxProps } from "./FilterCheckbox";
 import { Input, Skeleton } from "../../ui";
 
 type Item = IFilterChecboxProps;
 
-interface ICheckboxFiltersGroup {
+interface Props {
   title: string;
   items: Item[];
   defaultItems?: Item[];
@@ -20,7 +21,7 @@ interface ICheckboxFiltersGroup {
   name: string;
 }
 
-export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroup> = ({
+export const CheckboxFiltersGroup: FC<Props> = ({
   title,
   items,
   defaultItems,

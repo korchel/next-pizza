@@ -3,10 +3,9 @@
 import { cn } from "@/shared/lib";
 import { FC } from "react";
 
-import { PizzaImage } from "../PizzaImage";
-import { Title } from "../Title";
-import { Button } from "../../ui";
-import { PizzaTypeSelector } from "../PizzaTypeSelector";
+import { PizzaImage } from "./PizzaImage";
+import { Title, Button } from "../../ui";
+import { PizzaTypeSelector } from "./PizzaTypeSelector";
 import { PizzaSize, PizzaType, pizzaTypes, typesMap } from "@/shared/constants";
 import { Ingredient, ProductVariant } from "@prisma/client";
 import { IngredientTag } from "../IngredientTag";

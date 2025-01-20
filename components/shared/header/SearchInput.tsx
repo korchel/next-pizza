@@ -1,12 +1,13 @@
 "use client";
 
-import { cn } from "@/shared/lib/utils";
-import { api } from "@/shared/services/apiClient";
-import { Product } from "@prisma/client";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { ChangeEventHandler, FC, useRef, useState } from "react";
 import { useClickAway, useDebounce } from "react-use";
+
+import { cn } from "@/shared/lib/utils";
+import { api } from "@/shared/services/apiClient";
+import { Product } from "@prisma/client";
 
 interface Props {
   className?: string;
@@ -15,8 +16,8 @@ interface Props {
 export const SearchInput: FC<Props> = ({ className }) => {
   const [focused, setFocused] = useState(false);
   const ref = useRef(null);
-  const [query, setQuery] = useState('');
-  const [products, setProducts] = useState<Product[]>([])
+  const [query, setQuery] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
 
   useClickAway(ref, () => {
     setFocused(false);
@@ -28,18 +29,22 @@ export const SearchInput: FC<Props> = ({ className }) => {
 
   const handleOnClick = () => {
     setFocused(false);
-    setQuery('');
+    setQuery("");
     setProducts([]);
   };
 
-  useDebounce(() => {
-    api.products
-      .search(query)
-      .then((items) => {
-      setProducts(items);
-      })
-      .catch((error) => console.error(error));
-  }, 200, [query]);
+  useDebounce(
+    () => {
+      api.products
+        .search(query)
+        .then((items) => {
+          setProducts(items);
+        })
+        .catch((error) => console.error(error));
+    },
+    200,
+    [query]
+  );
 
   return (
     <>
@@ -60,14 +65,14 @@ export const SearchInput: FC<Props> = ({ className }) => {
           value={query}
           onChange={handleOnChange}
         />
-        {products.length > 0 && <div
-          className={cn(
-            "absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30",
-            focused && "visible opacity-100 top-12"
-          )}
-        >
-          {
-            products.map((product) => (
+        {products.length > 0 && (
+          <div
+            className={cn(
+              "absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30",
+              focused && "visible opacity-100 top-12"
+            )}
+          >
+            {products.map((product) => (
               <Link
                 href={`/product/${product.id}`}
                 className="flex items-center gap-3 px-3 py-3 hover:bg-primary/10"
@@ -81,10 +86,9 @@ export const SearchInput: FC<Props> = ({ className }) => {
                 />
                 <span>{product.name}</span>
               </Link>
-            ))
-          }
-          
-        </div>}
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

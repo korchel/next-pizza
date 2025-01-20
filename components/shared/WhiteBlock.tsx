@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren, ReactNode } from "react";
-import { Title } from "./Title";
+
+import { Title } from "../ui";
 import { cn } from "@/shared/lib/utils";
 
 interface Props {

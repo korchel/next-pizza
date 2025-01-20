@@ -5,21 +5,12 @@ import { FC, PropsWithChildren, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import {
-  Button,
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui";
+import { Button, Sheet } from "@/components/ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CartDrawerItem } from "./CartDrawerItem";
 import { getCartItemDetails } from "@/shared/lib";
 import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
-import { Title } from "../Title";
+import { Title } from "../../ui";
 import { useCart } from "@/shared/hooks";
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
@@ -37,9 +28,9 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div>
-      <Sheet>
-        <SheetTrigger asChild>{children}</SheetTrigger>
-        <SheetContent
+      <Sheet.Sheet>
+        <Sheet.SheetTrigger asChild>{children}</Sheet.SheetTrigger>
+        <Sheet.SheetContent
           className={cn(
             "flex flex-col justify-between pb-0 bg-[#F4F1EE]",
             !totalCost && "justify-center"
@@ -61,22 +52,22 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
               <p className="text-center text-neutral-500 mb-5">
                 Add something to make an order
               </p>
-              <SheetClose>
+              <Sheet.SheetClose>
                 <Button className="w-56 h-12 text-base" size="lg">
                   <ArrowLeft className="w-5 mr-2" />
                   Go back
                 </Button>
-              </SheetClose>
+              </Sheet.SheetClose>
             </div>
           )}
           {totalCost > 0 && (
             <>
-              <SheetHeader>
-                <SheetTitle>
+              <Sheet.SheetHeader>
+                <Sheet.SheetTitle>
                   There are{" "}
                   <span className="font-bold">{items.length} items</span>
-                </SheetTitle>
-              </SheetHeader>
+                </Sheet.SheetTitle>
+              </Sheet.SheetHeader>
               <div className="-mx-6 mt-5 overflow-hidden flex-1">
                 {items.map((item) => (
                   <CartDrawerItem
@@ -100,7 +91,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                   />
                 ))}
               </div>
-              <SheetFooter className="-mx-6 bg-white p-8">
+              <Sheet.SheetFooter className="-mx-6 bg-white p-8">
                 <div className="w-full">
                   <div className="flex mb-4">
                     <div className="flex flex-1 text-lg text-neutral-500">
@@ -121,11 +112,11 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                     </Button>
                   </Link>
                 </div>
-              </SheetFooter>
+              </Sheet.SheetFooter>
             </>
           )}
-        </SheetContent>
-      </Sheet>
+        </Sheet.SheetContent>
+      </Sheet.Sheet>
     </div>
   );
 };

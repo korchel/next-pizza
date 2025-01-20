@@ -1,11 +1,10 @@
 import { FC } from "react";
 
 import { cn } from "@/shared/lib/utils";
-import { Title } from "../Title";
-import { Button } from "../../ui";
-import { ProductImage } from "../ProductImage";
+import { Button, Title } from "../../ui";
+import { ProductImage } from "./ProductImage";
 
-interface IProductFormProps {
+interface Props {
   imageUrl: string;
   name: string;
   addToCart: () => void;
@@ -14,7 +13,7 @@ interface IProductFormProps {
   loading: boolean;
 }
 
-export const ProductForm: FC<IProductFormProps> = ({
+export const ProductForm: FC<Props> = ({
   imageUrl,
   name,
   addToCart,

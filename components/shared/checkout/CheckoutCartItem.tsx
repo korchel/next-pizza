@@ -3,6 +3,7 @@
 import React from "react";
 import { cn } from "@/shared/lib/utils";
 import { X } from "lucide-react";
+
 import { ICartItemProps } from "../cartItem/props";
 import * as CartItem from "../cartItem";
 import { Ingredient } from "@prisma/client";

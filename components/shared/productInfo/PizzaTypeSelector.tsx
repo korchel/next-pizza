@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
+import { cn } from "@/shared/lib/utils";
 
 type Type = {
   name: string;
@@ -9,14 +9,14 @@ type Type = {
   disabled?: boolean;
 };
 
-interface IPizzaTypeSelectorProps {
+interface Props {
   items: readonly Type[];
   onClick?: (value: Type["value"]) => void;
   selectedValue: Type["value"];
   className?: string;
 }
 
-export const PizzaTypeSelector: FC<IPizzaTypeSelectorProps> = ({
+export const PizzaTypeSelector: FC<Props> = ({
   items,
   onClick,
   selectedValue,

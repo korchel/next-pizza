@@ -2,17 +2,17 @@
 
 import { FC } from "react";
 import { useRouter } from "next/navigation";
-import { Dialog } from "@/components/ui";
 
+import { Dialog } from "@/components/ui";
 import { Ingredient, Product, ProductVariant } from "@prisma/client";
 import { ProductInfo } from "../productInfo";
 
-interface IProductModalProps {
+interface Props {
   product: Product & { variants: ProductVariant[]; ingredients: Ingredient[] };
   className?: string;
 }
 
-export const ProductModal: FC<IProductModalProps> = ({ product }) => {
+export const ProductModal: FC<Props> = ({ product }) => {
   const router = useRouter();
 
   return (

@@ -1,16 +1,16 @@
 "use client";
 
-import { cn } from "@/shared/lib/utils";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FC } from "react";
 import qs from "qs";
-import { Title } from "../Title";
-import { Input } from "../../ui";
+
+import { cn } from "@/shared/lib/utils";
+import { Title, Input } from "../../ui";
 import { RangeSlider } from "./RangeSlider";
 import { CheckboxFiltersGroup } from "./CheckboxFiltersGroup";
 import { useGetIngredients } from "@/shared/hooks/useGetIngredients";
-import { useRouter, useSearchParams } from "next/navigation";
 
-interface IFiltersProps {
+interface Props {
   className?: string;
 }
 
@@ -19,7 +19,7 @@ interface IPriceRange {
   to: number;
 }
 
-export const Filters: FC<IFiltersProps> = ({ className }) => {
+export const Filters: FC<Props> = ({ className }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 

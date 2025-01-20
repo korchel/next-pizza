@@ -8,8 +8,6 @@ import { useSession } from "next-auth/react";
 
 import {
   CheckoutSidebar,
-  Container,
-  Title,
   CheckoutCart,
   CheckoutPersonalDataForm,
   CheckoutAddressForm,
@@ -22,6 +20,7 @@ import {
 import { cn } from "@/shared/lib";
 import { createOrder } from "@/app/actions";
 import { api } from "@/shared/services/apiClient";
+import { Container, Title } from "@/components/ui";
 
 export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);

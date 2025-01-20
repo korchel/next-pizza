@@ -1,4 +1,6 @@
 export enum Routes {
   SEARCH_PRODUCTS = "products/search",
-  INGREDIENTS = 'ingredients',
+  INGREDIENTS = "ingredients",
+  CART = "cart",
+  STORIES = "stories",
 }

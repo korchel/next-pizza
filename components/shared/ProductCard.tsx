@@ -1,12 +1,11 @@
-import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
 import { FC } from "react";
-import { Title } from "./Title";
 import { Plus } from "lucide-react";
-import { Button } from "../ui";
+
+import { Button, Title } from "../ui";
 import { Ingredient } from "@prisma/client";
 
-interface IProductCardProps {
+interface Props {
   id: number;
   name: string;
   price: number;
@@ -15,7 +14,7 @@ interface IProductCardProps {
   className?: string;
 }
 
-export const ProductCard: FC<IProductCardProps> = ({
+export const ProductCard: FC<Props> = ({
   id,
   name,
   price,
@@ -24,7 +23,7 @@ export const ProductCard: FC<IProductCardProps> = ({
   className,
 }) => {
   return (
-    <div className={cn(className)}>
+    <div className={className}>
       <Link href={`/product/${id}`}>
         <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
           <img className="w-[215px] h-[215px]" src={imageUrl} alt={name} />

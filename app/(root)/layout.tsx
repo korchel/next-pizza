@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/shared/header";
+
+import { Header } from "@/components/shared";
 
 export const metadata: Metadata = {
   title: "Root",

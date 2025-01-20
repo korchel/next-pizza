@@ -7,11 +7,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { cn } from "@/shared/lib/utils";
-import { Container } from "../Container";
-import { SearchInput } from "../SearchInput";
+import { Container } from "../../ui";
+import { SearchInput } from "./SearchInput";
 import { CartButton } from "./CartButton";
 import { ProfileButton } from "./ProfileButton";
-import { AuthModal } from "../modals/authModal";
+import { AuthModal } from "../modals";
 
 interface IHeaderProps {
   hasCart?: boolean;

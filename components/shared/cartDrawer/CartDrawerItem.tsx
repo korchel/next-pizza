@@ -4,13 +4,13 @@ import { FC } from "react";
 import * as CartIem from "../cartItem";
 import { Trash2Icon } from "lucide-react";
 
-interface ICartDrawerItemProps extends CartIem.ICartItemProps {
+interface Props extends CartIem.ICartItemProps {
   clickCounter: (type: "plus" | "minus") => void;
   removeItem: () => void;
   className?: string;
 }
 
-export const CartDrawerItem: FC<ICartDrawerItemProps> = ({
+export const CartDrawerItem: FC<Props> = ({
   imageUrl,
   details,
   name,

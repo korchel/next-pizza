@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import ReactStories from "react-insta-stories";
 
-import { Container } from "./Container";
+import { Container } from "../ui";
 import { cn } from "@/shared/lib/utils";
 import { api } from "@/shared/services/apiClient";
 import { IStory } from "@/shared/services/stories";

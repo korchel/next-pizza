@@ -16,8 +16,6 @@ export default async function ProfilePage() {
       id: Number(session.id),
     },
   });
-  console.log("SESSION", session);
-  console.log("USER", user);
 
   if (!user) {
     return redirect("./not-auth");

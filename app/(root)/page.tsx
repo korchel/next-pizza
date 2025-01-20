@@ -1,13 +1,13 @@
+import { Suspense } from "react";
+
 import {
-  Container,
   Filters,
-  Title,
   TopBar,
   Stories,
+  ProductsGroupList,
 } from "@/components/shared";
-import { ProductsGroupList } from "@/components/shared/ProductsGroupList";
+import { Container, Title } from "@/components/ui";
 import { filterPizzas, SearchParams } from "@/shared/lib/filterPizzas";
-import { Suspense } from "react";
 
 export default async function Home({
   searchParams,

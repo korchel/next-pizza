@@ -3,20 +3,24 @@
 import { cn } from "@/shared/lib/utils";
 import { FC, useEffect, useRef } from "react";
 import { useIntersection } from "react-use";
-import { Title } from "./Title";
+
+import { Title } from "../ui";
 import { ProductCard } from "./ProductCard";
 import { useCategoryStore } from "@/shared/store/category";
 import { Ingredient, Product, ProductVariant } from "@prisma/client";
 
-interface IProductsGroupListProps {
+interface Props {
   title: string;
-  items: (Product & { variants: ProductVariant[]; ingredients: Ingredient[] })[];
+  items: (Product & {
+    variants: ProductVariant[];
+    ingredients: Ingredient[];
+  })[];
   listClassName?: string;
   categoryId: number;
   className?: string;
 }
 
-export const ProductsGroupList: FC<IProductsGroupListProps> = ({
+export const ProductsGroupList: FC<Props> = ({
   title,
   items,
   listClassName,

@@ -1,16 +1,17 @@
 import { cn } from "@/shared/lib/utils";
 import { FC } from "react";
-import { Container } from "../Container";
+
+import { Container } from "../../ui";
 import { Categories } from "./Categories";
-import { SortPopup } from "./SortPopup";
+// import { SortPopup } from "./SortPopup";
 import { Category } from "@prisma/client";
 
-interface ITopBarProps {
+interface Props {
   categories: Category[];
   className?: string;
 }
 
-export const TopBar: FC<ITopBarProps> = ({ categories, className }) => {
+export const TopBar: FC<Props> = ({ categories, className }) => {
   return (
     <div
       className={cn(
@@ -20,7 +21,7 @@ export const TopBar: FC<ITopBarProps> = ({ categories, className }) => {
     >
       <Container>
         <Categories items={categories} />
-        <SortPopup />
+        {/* <SortPopup /> */}
       </Container>
     </div>
   );

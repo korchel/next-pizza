@@ -1,6 +1,9 @@
-import { Button, Dialog } from "@/components/ui";
+"use client";
+
 import { signIn } from "next-auth/react";
 import { FC, useState } from "react";
+
+import { Button, Dialog } from "@/components/ui";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 

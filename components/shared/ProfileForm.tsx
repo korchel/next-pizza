@@ -3,14 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { signOut } from "next-auth/react";
+import toast from "react-hot-toast";
 
 import { registerSchema, TRegisterValues } from "./modals/authModal/schemas";
 import { User } from "@prisma/client";
-import { Button } from "../ui";
-import toast from "react-hot-toast";
-import { signOut } from "next-auth/react";
-import { Container } from "./Container";
-import { Title } from "./Title";
+import { Button, Title, Container } from "../ui";
 import { FormInput } from "./form";
 import { updateUserInfo } from "@/app/actions";
 

@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-import { Button } from "../ui";
-import { Title } from "./Title";
+import { Button, Title } from "../ui";
 import { cn } from "@/shared/lib/utils";
 
 interface Props {

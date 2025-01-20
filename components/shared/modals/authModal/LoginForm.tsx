@@ -1,13 +1,12 @@
 import { FC } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-
-import { loginSchema, TLoginValues } from "./schemas";
-import { Button } from "@/components/ui";
-import { FormInput } from "../../form";
-import { Title } from "../../Title";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+
+import { loginSchema, TLoginValues } from "./schemas";
+import { Button, Title } from "@/components/ui";
+import { FormInput } from "../../form";
 
 interface Props {
   close: () => void;
