@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { FC } from "react";
 import { Plus } from "lucide-react";
+import Image from "next/image";
 
 import { Button, Title } from "../ui";
 import { Ingredient } from "@prisma/client";
+import { Routes } from "@/shared/constants/routes";
 
 interface Props {
   id: number;
@@ -24,9 +26,9 @@ export const ProductCard: FC<Props> = ({
 }) => {
   return (
     <div className={className}>
-      <Link href={`/product/${id}`}>
+      <Link href={Routes.PRODUCT + `/${id}`}>
         <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-          <img className="w-[215px] h-[215px]" src={imageUrl} alt={name} />
+          <Image width={215} height={215} src={imageUrl} alt={name} />
         </div>
         <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
         <p className="text-sm text-gray-400">

@@ -1,8 +1,10 @@
 "use server";
 
 import { CheckoutFormType } from "@/components/shared/checkout/checkoutSchema";
-import { PayOrderTemplate } from "@/components/shared/checkout/email/PayOrderTemplate";
-import { VerificationTemplate } from "@/components/shared/checkout/email/VerificationTemplate";
+import {
+  PayOrderTemplate,
+  VerificationTemplate,
+} from "@/components/shared/checkout/email";
 import { prisma } from "@/prisma/client";
 import { createPayment, getUserSession, sendEmail } from "@/shared/lib";
 import { OrderStatus, Prisma } from "@prisma/client";

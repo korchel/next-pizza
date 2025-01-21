@@ -29,7 +29,7 @@ export const CartDrawerItem: FC<Props> = ({
         className
       )}
     >
-      <CartIem.Image src={imageUrl} />
+      <CartIem.Picture src={imageUrl} alt={name} />
       <div className="flex-1">
         <CartIem.Info name={name} details={details} />
         <hr className="my-3" />

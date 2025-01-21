@@ -4,10 +4,12 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 import { ChangeEventHandler, FC, useRef, useState } from "react";
 import { useClickAway, useDebounce } from "react-use";
+import Image from "next/image";
 
 import { cn } from "@/shared/lib/utils";
 import { api } from "@/shared/services/apiClient";
 import { Product } from "@prisma/client";
+import { Routes } from "@/shared/constants/routes";
 
 interface Props {
   className?: string;
@@ -74,14 +76,15 @@ export const SearchInput: FC<Props> = ({ className }) => {
           >
             {products.map((product) => (
               <Link
-                href={`/product/${product.id}`}
+                href={Routes.PRODUCT + `/${product.id}`}
                 className="flex items-center gap-3 px-3 py-3 hover:bg-primary/10"
                 key={product.id}
                 onClick={handleOnClick}
               >
-                <img
+                <Image
                   src={product.imageUrl}
-                  className="h-8 w-8 rounded"
+                  width={32}
+                  height={32}
                   alt={product.name}
                 />
                 <span>{product.name}</span>

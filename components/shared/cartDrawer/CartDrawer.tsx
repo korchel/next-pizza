@@ -12,6 +12,7 @@ import { getCartItemDetails } from "@/shared/lib";
 import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
 import { Title } from "../../ui";
 import { useCart } from "@/shared/hooks";
+import { Routes } from "@/shared/constants/routes";
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
   const { totalCost, items, updateItemQuantity, removeCartItem } = useCart();
@@ -100,7 +101,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                     </div>
                     <div className="font-bold text-lg">{totalCost}p</div>
                   </div>
-                  <Link href="/checkout">
+                  <Link href={Routes.CHECKOUT}>
                     <Button
                       onClick={() => setRedirecting(true)}
                       loading={redirecting}

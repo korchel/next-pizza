@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui";
+import { Routes } from "@/shared/constants/routes";
 
 interface Props {
   openModal: () => void;
@@ -16,7 +17,7 @@ export const ProfileButton: FC<Props> = ({ openModal, className }) => {
   return (
     <div className={className}>
       {session ? (
-        <Link href="/profile">
+        <Link href={Routes.PROFILE}>
           <Button variant="secondary" className="flex items-center gap-2">
             <CircleUser size={18} />
             Profile

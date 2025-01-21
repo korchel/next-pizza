@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import ReactStories from "react-insta-stories";
+import Image from "next/image";
 
 import { Container } from "../ui";
 import { cn } from "@/shared/lib/utils";
@@ -52,8 +53,9 @@ export const Stories: React.FC<Props> = ({ className }) => {
           ))}
 
         {stories.map((story) => (
-          <img
+          <Image
             key={story.id}
+            alt={"story"}
             onClick={() => onClickStory(story)}
             className="rounded-md cursor-pointer"
             height={250}

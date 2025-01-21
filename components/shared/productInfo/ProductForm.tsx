@@ -23,7 +23,7 @@ export const ProductForm: FC<Props> = ({
 }) => {
   return (
     <div className={cn(className, "flex flex-1")}>
-      <ProductImage imageUrl={imageUrl} />
+      <ProductImage imageUrl={imageUrl} name={name} />
       <div className="w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
 
