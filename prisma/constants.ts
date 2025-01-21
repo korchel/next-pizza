@@ -5,136 +5,205 @@ export const categories = [
   { name: "Коктейли" },
   { name: "Напитки" },
   { name: "Десерты" },
+  { name: "Соусы" },
 ];
 
 export const ingredients = [
   {
-    name: "Сырный бортик",
-    price: 179,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png",
-  },
-  {
-    name: "Сливочная моцарелла",
+    name: "Моцарелла",
     price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/cdea869ef287426386ed634e6099a5ba.png",
+    imageUrl: "/ingredients/Моцарелла.png",
   },
   {
     name: "Сыры чеддер и пармезан",
     price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA69C1FE796",
+    imageUrl: "/ingredients/Сыры чеддер и пармезан.png",
   },
   {
     name: "Острый перец халапеньо",
     price: 59,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/11ee95b6bfdf98fb88a113db92d7b3df.png",
-  },
-  {
-    name: "Нежный цыпленок",
-    price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA5B328D35A",
+    imageUrl: "/ingredients/Острый перец халапеньо.png",
   },
   {
     name: "Шампиньоны",
     price: 59,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA67259A324",
+    imageUrl: "/ingredients/Шампиньоны.png",
   },
   {
     name: "Бекон",
     price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA637AAB68F",
+    imageUrl: "/ingredients/Бекон.png",
   },
   {
-    name: "Ветчина",
+    name: "Пепперони",
     price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA61B9A8D61",
+    imageUrl: "/ingredients/Пепперони.png",
   },
   {
-    name: "Пикантная пепперони",
-    price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA6258199C3",
-  },
-  {
-    name: "Острая чоризо",
-    price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA62D5D6027",
-  },
-  {
-    name: "Маринованные огурчики",
+    name: "Маринованные огурцы",
     price: 59,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9EA89958D782B",
+    imageUrl: "/ingredients/Маринованные огурцы.png",
   },
   {
     name: "Свежие томаты",
     price: 59,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA7AC1A1D67",
+    imageUrl: "/ingredients/Свежие томаты.png",
   },
   {
     name: "Красный лук",
     price: 59,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA60AE6464C",
+    imageUrl: "/ingredients/Красный лук.png",
   },
   {
-    name: "Сочные ананасы",
+    name: "Ананасы",
     price: 59,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0",
+    imageUrl: "/ingredients/Ананасы.png",
   },
   {
     name: "Итальянские травы",
     price: 39,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/370dac9ed21e4bffaf9bc2618d258734.png",
+    imageUrl: "/ingredients/Итальянские травы.png",
   },
   {
     name: "Сладкий перец",
     price: 59,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA63F774C1B",
+    imageUrl: "/ingredients/Сладкий перец.png",
   },
   {
-    name: "Кубики брынзы",
+    name: "Брынза",
     price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA6B0FFC349",
-  },
-  {
-    name: "Митболы",
-    price: 79,
-    imageUrl:
-      "https://cdn.dodostatic.net/static/Img/Ingredients/b2f3a5d5afe44516a93cfc0d2ee60088.png",
+    imageUrl: "/ingredients/Брынза.png",
   },
 ].map((ingredient, index) => ({ id: index + 1, ...ingredient }));
 
 export const products = [
   {
     name: "Сырники",
-    imageUrl:
-      "https://media.dodostatic.net/image/r:292x292/11EF9060DD723610942E8F368B03540A.avif",
+    imageUrl: "/products/Сырники.avif",
+    categoryId: 2,
+  },
+  {
+    name: "Кофе Американо",
+    imageUrl: "/products/Кофе Американо.avif",
+    categoryId: 2,
+  },
+  {
+    name: "Сырники с малиновым вареньем",
+    imageUrl: "/products/Сырники с малиновым вареньем.avif",
+    categoryId: 2,
+  },
+  {
+    name: "Кофе Латте",
+    imageUrl: "/products/Кофе Латте.avif",
     categoryId: 2,
   },
   {
     name: "Картофель из печи с соусом",
-    imageUrl:
-      "https://media.dodostatic.net/image/r:292x292/11EED646A874549F90802E75F4D358ED.avif",
+    imageUrl: "/products/Картофель из печи с соусом.avif",
+    categoryId: 3,
+  },
+  {
+    name: "Салат Цезарь",
+    imageUrl: "/products/Салат Цезарь.avif",
     categoryId: 3,
   },
   {
     name: "Молочный коктейль Ежевика-малина",
-    imageUrl:
-      "https://media.dodostatic.net/image/r:292x292/11EEB92C801211CBAF91BB30F77568C5.avif",
+    imageUrl: "/products/Молочный коктейль Ежевика-малина.avif",
     categoryId: 4,
+  },
+  {
+    name: "Добрый Кола",
+    imageUrl: "/products/Добрый Кола.avif",
+    categoryId: 5,
+  },
+  {
+    name: "Морс Черная смородина",
+    imageUrl: "/products/Морс Черная смородина.avif",
+    categoryId: 5,
+  },
+  {
+    name: "Яблочный сок",
+    imageUrl: "/products/Яблочный сок.avif",
+    categoryId: 5,
+  },
+  {
+    name: "Добрый Лимон-Лайм",
+    imageUrl: "/products/Добрый Лимон-Лайм.avif",
+    categoryId: 5,
+  },
+  {
+    name: "Добрый Апельсин",
+    imageUrl: "/products/Добрый Апельсин.avif",
+    categoryId: 5,
+  },
+  {
+    name: "Морс Клюква",
+    imageUrl: "/products/Морс Клюква.avif",
+    categoryId: 5,
+  },
+  {
+    name: "Сорбет Лимонный фреш",
+    imageUrl: "/products/Сорбет Лимонный фреш.avif",
+    categoryId: 6,
+  },
+  {
+    name: "Чизкейк Нью-Йорк с кокосом",
+    imageUrl: "/products/Чизкейк Нью-Йорк с кокосом.avif",
+    categoryId: 6,
+  },
+  {
+    name: "Макарон манго-маракуйя",
+    imageUrl: "/products/Макарон манго-маракуйя.avif",
+    categoryId: 6,
+  },
+  {
+    name: "Шоколадное печенье",
+    imageUrl: "/products/Шоколадное печенье.avif",
+    categoryId: 6,
+  },
+];
+
+export const stories = [
+  {
+    previewImageUrl: "/stories/1.webp",
+  },
+  {
+    previewImageUrl: "/stories/2.webp",
+  },
+  {
+    previewImageUrl: "/stories/3.webp",
+  },
+  {
+    previewImageUrl: "/stories/4.webp",
+  },
+  {
+    previewImageUrl: "/stories/5.webp",
+  },
+  {
+    previewImageUrl: "/stories/6.webp",
+  },
+];
+
+export const storiesItems = [
+  {
+    storyId: 1,
+    sourceUrl: "/stories/storiesItems/1/1.webp",
+  },
+  {
+    storyId: 1,
+    sourceUrl: "/stories/storiesItems/1/2.webp",
+  },
+  {
+    storyId: 1,
+    sourceUrl: "/stories/storiesItems/1/3.webp",
+  },
+  {
+    storyId: 1,
+    sourceUrl: "/stories/storiesItems/1/4.webp",
+  },
+  {
+    storyId: 1,
+    sourceUrl: "/stories/storiesItems/1/5.webp",
   },
 ];
