@@ -24,8 +24,8 @@ export const IngredientTag: FC<Props> = ({
   return (
     <div
       className={cn(
-        "flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white",
-        { "border border-primary": active },
+        "flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white border border-transparent",
+        { "border-primary": active },
         className
       )}
       onClick={onClick}
@@ -35,7 +35,7 @@ export const IngredientTag: FC<Props> = ({
       )}
       <Image width={110} height={110} src={imageUrl} alt={name} />
       <span className="text-xs mb-1">{name}</span>
-      <span className="font-bold">{price} P</span>
+      <span className="font-bold">{price} ₽</span>
     </div>
   );
 };

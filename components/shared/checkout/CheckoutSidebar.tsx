@@ -26,12 +26,12 @@ export const CheckoutSidebar: FC<Props> = ({
   return (
     <WhiteBlock className={cn("p-6 sticky top-4", className)}>
       <div className="flex flex-col gap-1">
-        <span className="text-xl">Total: </span>
+        <span className="text-xl">Итого:</span>
         {loading ? (
           <Skeleton className="h-7 w-full" />
         ) : (
           <span className="text-xl font-extrabold">
-            {costIncludingTaxesAndDelivary} P
+            {costIncludingTaxesAndDelivary} ₽
           </span>
         )}
       </div>
@@ -39,14 +39,14 @@ export const CheckoutSidebar: FC<Props> = ({
         title={
           <div className="flex items-center">
             <Package size={20} className="mr-2  text-gray-300" />
-            Cost
+            Стоимость корзины:
           </div>
         }
         value={
           loading ? (
             <Skeleton className="h-7 w-14 rounded-[6px]" />
           ) : (
-            `${totalCost} p`
+            `${totalCost} ₽`
           )
         }
       />
@@ -54,14 +54,14 @@ export const CheckoutSidebar: FC<Props> = ({
         title={
           <div className="flex items-center">
             <Percent size={20} className="mr-2 text-gray-300" />
-            Taxes
+            Налоги:
           </div>
         }
         value={
           loading ? (
             <Skeleton className="h-7 w-14 rounded-[6px]" />
           ) : (
-            `${taxes} p`
+            `${taxes} ₽`
           )
         }
       />
@@ -69,14 +69,14 @@ export const CheckoutSidebar: FC<Props> = ({
         title={
           <div className="flex items-center">
             <Truck size={20} className="mr-2  text-gray-300" />
-            Delivary
+            Доставка:
           </div>
         }
         value={
           loading ? (
             <Skeleton className="h-7 w-14 rounded-[6px]" />
           ) : (
-            `${DELIVERY_PRICE} p`
+            `${DELIVERY_PRICE} ₽`
           )
         }
       />
@@ -85,7 +85,7 @@ export const CheckoutSidebar: FC<Props> = ({
         type="submit"
         className="w-full h-14 rounded-xl mt-6 text-base"
       >
-        Pay
+        Перейти к оплате
         <ArrowRight className="w-5 ml-2" />
       </Button>
     </WhiteBlock>

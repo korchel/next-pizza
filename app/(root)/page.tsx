@@ -19,7 +19,7 @@ export default async function Home({
   return (
     <>
       <Container className="mt-10">
-        <Title text="All pizzas" size="lg" className="font-extrabold" />
+        <Title text="Все пиццы" size="lg" className="font-extrabold" />
       </Container>
       <TopBar
         categories={categories.filter(

@@ -8,7 +8,7 @@ import { Title, Button } from "../../ui";
 import { PizzaTypeSelector } from "./PizzaTypeSelector";
 import { PizzaSize, PizzaType, pizzaTypes, typesMap } from "@/shared/constants";
 import { Ingredient, ProductVariant } from "@prisma/client";
-import { IngredientTag } from "../IngredientTag";
+import { IngredientTag } from "./IngredientTag";
 import { calcPizzaPrice } from "@/shared/lib";
 import { usePizzaOptions } from "@/shared/hooks";
 
@@ -61,7 +61,7 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
       <PizzaImage imageUrl={imageUrl} size={size} name={name} />
       <div className="w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
-        <p className="text-gray-400">{`${size} cm, ${typesMap[type]}`}</p>
+        <p className="text-gray-400">{`${size} см, ${typesMap[type]}`}</p>
         <PizzaTypeSelector
           items={availableSizes}
           selectedValue={String(size)}
@@ -92,7 +92,7 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
           onClick={handleClick}
         >
-          Add to cart for {totalPrice}
+          Добавьте в корзину за {totalPrice} ₽
         </Button>
       </div>
     </div>

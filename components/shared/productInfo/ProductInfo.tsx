@@ -25,12 +25,12 @@ export const ProductInfo: FC<Props> = ({ product, close }) => {
   ) => {
     try {
       await addCartItem({ productVariantId, ingredients });
-      toast.success("Item added to cart", {
+      toast.success("Товар добавлен в корзину", {
         icon: "✅",
       });
       close?.();
     } catch (error) {
-      toast.error("Failed to add item to cart", {
+      toast.error("Ошибка при добавлении товара в корзину", {
         icon: "❌",
       });
       console.error(error);

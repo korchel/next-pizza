@@ -13,7 +13,6 @@ interface Props {
   price: number;
   imageUrl: string;
   ingredients: Ingredient[];
-  className?: string;
 }
 
 export const ProductCard: FC<Props> = ({
@@ -22,28 +21,25 @@ export const ProductCard: FC<Props> = ({
   price,
   imageUrl,
   ingredients,
-  className,
 }) => {
   return (
-    <div className={className}>
-      <Link href={Routes.PRODUCT + `/${id}`}>
-        <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-          <Image width={215} height={215} src={imageUrl} alt={name} />
-        </div>
-        <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
-        <p className="text-sm text-gray-400">
-          {ingredients.map((ingredient) => ingredient.name).join(", ")}
-        </p>
-        <div className="flex justify-between items-center mt-4">
-          <span>
-            from <b>{price} p</b>
-          </span>
-          <Button variant="secondary">
-            <Plus size={20} className="mr-1" />
-            Add
-          </Button>
-        </div>
-      </Link>
-    </div>
+    <Link href={Routes.PRODUCT + `/${id}`} className="flex flex-col">
+      <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
+        <Image width={215} height={215} src={imageUrl} alt={name} />
+      </div>
+      <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
+      <p className="text-sm text-gray-400">
+        {ingredients.map((ingredient) => ingredient.name).join(", ")}
+      </p>
+      <div className="flex justify-between items-center mt-auto">
+        <span>
+          От <b>{price} ₽</b>
+        </span>
+        <Button variant="secondary">
+          <Plus size={20} className="mr-1" />
+          Добавить
+        </Button>
+      </div>
+    </Link>
   );
 };

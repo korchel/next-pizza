@@ -51,12 +51,12 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                 className="text-center font-bold my-2"
               />
               <p className="text-center text-neutral-500 mb-5">
-                Add something to make an order
+                Добавьте что-нибудь, чтобы сделать заказ
               </p>
               <Sheet.SheetClose>
                 <Button className="w-56 h-12 text-base" size="lg">
                   <ArrowLeft className="w-5 mr-2" />
-                  Go back
+                  Назад
                 </Button>
               </Sheet.SheetClose>
             </div>
@@ -65,8 +65,8 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
             <>
               <Sheet.SheetHeader>
                 <Sheet.SheetTitle>
-                  There are{" "}
-                  <span className="font-bold">{items.length} items</span>
+                  В корзине{" "}
+                  <span className="font-bold">{items.length} товаров</span>
                 </Sheet.SheetTitle>
               </Sheet.SheetHeader>
               <div className="-mx-6 mt-5 overflow-hidden flex-1">
@@ -96,10 +96,10 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                 <div className="w-full">
                   <div className="flex mb-4">
                     <div className="flex flex-1 text-lg text-neutral-500">
-                      <div>Total</div>
+                      <div>Всего:</div>
                       <div className="flex-1 border-b border-dashed border-b-neutral-200 relatove -top-1 mx-2" />
                     </div>
-                    <div className="font-bold text-lg">{totalCost}p</div>
+                    <div className="font-bold text-lg">{totalCost} ₽</div>
                   </div>
                   <Link href={Routes.CHECKOUT}>
                     <Button
@@ -108,7 +108,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                       type="submit"
                       className="w-full h-12 text-base"
                     >
-                      Order
+                      Оформить заказ
                       <ArrowRight size={20} className="ml-2" />
                     </Button>
                   </Link>

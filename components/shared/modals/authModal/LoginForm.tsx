@@ -30,13 +30,13 @@ export const LoginForm: FC<Props> = ({ close }) => {
       if (!response?.ok) {
         throw Error();
       }
-      toast.success("Logged in", {
+      toast.success("Вход выполнен", {
         icon: "✅",
       });
       close();
     } catch (error) {
       console.error("LOGIN ERROR", error);
-      toast.error("Login failed", {
+      toast.error("Вход не выполнен", {
         icon: "❌",
       });
     }
@@ -71,7 +71,7 @@ export const LoginForm: FC<Props> = ({ close }) => {
           className="h-12 text-base"
           type="submit"
         >
-          Enter
+          Войти
         </Button>
       </form>
     </FormProvider>

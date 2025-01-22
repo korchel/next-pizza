@@ -20,7 +20,7 @@ export const ProfileButton: FC<Props> = ({ openModal, className }) => {
         <Link href={Routes.PROFILE}>
           <Button variant="secondary" className="flex items-center gap-2">
             <CircleUser size={18} />
-            Profile
+            Профиль
           </Button>
         </Link>
       ) : (
@@ -30,7 +30,7 @@ export const ProfileButton: FC<Props> = ({ openModal, className }) => {
           variant="outline"
         >
           <User size={16} />
-          Enter
+          Войти
         </Button>
       )}
     </div>

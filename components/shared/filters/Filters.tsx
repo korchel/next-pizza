@@ -96,27 +96,27 @@ export const Filters: FC<Props> = ({ className }) => {
 
   return (
     <div className={cn(className)}>
-      <Title text="filter" size="sm" className="mb-5 font-bold" />
+      <Title text="Фильтры" size="sm" className="mb-5 font-bold" />
       <CheckboxFiltersGroup
         name="pizzaTypes"
-        title="Pizza types"
+        title="Тип теста"
         className="mb-5"
         selected={chosenPizzaTypes || []}
         items={[
-          { text: "Thin", value: "1" },
-          { text: "Traditional", value: "2" },
+          { text: "Тонкое", value: "1" },
+          { text: "Традиционное", value: "2" },
         ]}
         onCheck={onTogglePizzaType}
       />
       <CheckboxFiltersGroup
         name="sizes"
-        title="Sizes"
+        title="Размер"
         className="mb-5"
         selected={chosenPizzaSizes}
         items={[
-          { text: "20cm", value: "20" },
-          { text: "30cm", value: "30" },
-          { text: "40cm", value: "40" },
+          { text: "20см", value: "20" },
+          { text: "30см", value: "30" },
+          { text: "40см", value: "40" },
         ]}
         onCheck={onTogglePizzaSize}
       />
@@ -153,7 +153,7 @@ export const Filters: FC<Props> = ({ className }) => {
       </div>
       <CheckboxFiltersGroup
         name="ingredients"
-        title="ingeridents"
+        title="Ингредиенты"
         className="mt-5"
         limit={6}
         defaultItems={displayIngredients.slice(0, 6)}

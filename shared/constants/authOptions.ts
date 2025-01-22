@@ -61,7 +61,6 @@ export const authOptions: AuthOptions = {
           name: foundUser.fullName,
           role: foundUser.role,
         };
-        return null;
       },
     }),
   ],

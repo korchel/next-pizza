@@ -78,7 +78,7 @@ export const AuthModal: FC<Props> = ({ isOpen, close }) => {
           type="button"
           className="h-12"
         >
-          {formType !== "login" ? "Enter" : "Register"}
+          {formType !== "login" ? "Войти" : "Зарегистрироваться"}
         </Button>
       </Dialog.DialogContent>
     </Dialog.Dialog>

@@ -3,14 +3,14 @@ import { cn } from "@/shared/lib/utils";
 import { Minus, Plus } from "lucide-react";
 import { FC } from "react";
 
-interface IPlusMinusButtonProps {
+interface Props {
   onClick?: () => void;
   type: "plus" | "minus";
   disabled?: boolean;
   className?: string;
 }
 
-export const PlusMinusButton: FC<IPlusMinusButtonProps> = ({
+export const PlusMinusButton: FC<Props> = ({
   type,
   disabled,
   onClick,

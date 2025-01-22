@@ -10,15 +10,15 @@ interface Props {
 
 export const CheckoutAddressForm: FC<Props> = ({ className }) => {
   return (
-    <WhiteBlock title="3. Address" className={className}>
+    <WhiteBlock title="3. Адрес" className={className}>
       <div className="flex flex-col gap-5">
-        <FormInput name="address" className="text-base" placeholder="address" />
+        <FormInput name="address" className="text-base" placeholder="Адрес" />
 
         <FormTextarea
           name="comment"
           rows={5}
           className="text-base"
-          placeholder="comment to the order"
+          placeholder="Комментарий к заказу"
         />
       </div>
     </WhiteBlock>
