@@ -1,4 +1,4 @@
-import * as bcrypt from "bcrypt";
+import { compare } from "bcryptjs";
 import { AuthOptions, Session } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -42,12 +42,10 @@ export const authOptions: AuthOptions = {
         if (!foundUser) {
           return null;
         }
-        // const isPasswordValid = await bcrypt.compare(
-        //   password,
-        //   foundUser?.password as string
-        // );
-
-        const isPasswordValid = true;
+        const isPasswordValid = await compare(
+          password,
+          foundUser?.password as string
+        );
 
         if (!isPasswordValid) {
           return null;

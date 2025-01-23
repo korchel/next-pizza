@@ -1,5 +1,6 @@
 "use server";
 
+import { hash } from "bcryptjs";
 import { CheckoutFormType } from "@/components/shared/checkout/checkoutSchema";
 import {
   PayOrderTemplate,
@@ -8,7 +9,6 @@ import {
 import { prisma } from "@/prisma/client";
 import { createPayment, getUserSession, sendEmail } from "@/shared/lib";
 import { OrderStatus, Prisma } from "@prisma/client";
-import { hashSync } from "bcrypt";
 import { cookies } from "next/headers";
 
 export async function createOrder(data: CheckoutFormType) {
@@ -119,6 +119,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
         id: Number(currentUser.id),
       },
     });
+    const password = await hash(body.password as string, 10);
     await prisma.user.update({
       where: {
         id: Number(currentUser.id),
@@ -126,9 +127,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
       data: {
         fullName: body.fullName,
         email: body.email,
-        password: body.password
-          ? hashSync(body.password as string, 10)
-          : foundUser?.password,
+        password: body.password ? password : foundUser?.password,
       },
     });
   } catch (error) {
@@ -150,11 +149,12 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 
       throw new Error("User already exists");
     }
+    const password = await hash(body.password as string, 10);
     const createdUser = await prisma.user.create({
       data: {
         fullName: body.fullName,
         email: body.email,
-        password: hashSync(body.password as string, 10),
+        password,
       },
     });
 
