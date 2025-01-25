@@ -1,5 +1,5 @@
 import { prisma } from "./client";
-import { hashSync } from "bcrypt";
+import { hash } from "bcryptjs";
 import {
   categories,
   ingredients,
@@ -36,14 +36,14 @@ async function up() {
       {
         fullName: "user",
         email: "user@test.ru",
-        password: hashSync("11111", 10),
+        password: await hash("11111", 10),
         verified: new Date(),
         role: "USER",
       },
       {
         fullName: "admin",
         email: "admin@test.ru",
-        password: hashSync("11111", 10),
+        password: await hash("11111", 10),
         verified: new Date(),
         role: "ADMIN",
       },

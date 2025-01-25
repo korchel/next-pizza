@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { WhiteBlock } from "../WhiteBlock";
-import { FormInput } from "../form";
+import { FormInput, PhoneInput } from "../form";
 
 interface Props {
   className?: string;
@@ -18,7 +18,7 @@ export const CheckoutPersonalDataForm: FC<Props> = ({ className }) => {
           placeholder="Фамилия"
         />
         <FormInput name="email" className="text-base" placeholder="E-Mail" />
-        <FormInput name="phone" className="text-base" placeholder="Телефон" />
+        <PhoneInput name="phone" className="text-base" placeholder="Телефон" />
       </div>
     </WhiteBlock>
   );
