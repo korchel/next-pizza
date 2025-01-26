@@ -32,10 +32,11 @@ export const Header: FC<IHeaderProps> = ({
     let toastMessage = "";
 
     if (searchParams.has("paid")) {
-      toastMessage = "Order has been paid! Info sent by e-mail";
+      toastMessage =
+        "Заказ успешно оплачен! Информация о заказе от правлена по e-mail";
     }
     if (searchParams.has("verified")) {
-      toastMessage = "E-mail verified";
+      toastMessage = "E-mail подтвержден";
     }
     if (toastMessage) {
       router.replace("/");

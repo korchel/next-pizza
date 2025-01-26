@@ -68,13 +68,13 @@ export default function CheckoutPage() {
     try {
       setSubmitting(true);
       const url = await createOrder(data);
-      toast.success("Order created");
+      toast.success("Заказ создан");
       if (url) {
         location.href = url;
       }
     } catch (error) {
       setSubmitting(false);
-      toast.error("Failed to create order");
+      toast.error("Ошибка при создании заказа");
       console.error(error);
     }
   };

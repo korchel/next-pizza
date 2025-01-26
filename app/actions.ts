@@ -93,16 +93,29 @@ export async function createOrder(data: CheckoutFormType) {
 
     const paymentUrl = paymentData.confirmation.confirmation_url;
 
-    await sendEmail(
-      data.email,
-      "Next Pizza | order #" + newOrder.id,
-      PayOrderTemplate({
-        orderId: newOrder.id,
-        totalCost: newOrder.totalCost,
-        paymentUrl,
-      })
-    );
-    return paymentUrl;
+    // await sendEmail(
+    //   data.email,
+    //   "Next Pizza | order #" + newOrder.id,
+    //   PayOrderTemplate({
+    //     orderId: newOrder.id,
+    //     totalCost: newOrder.totalCost,
+    //     paymentUrl,
+    //   })
+    // );
+    // NOW USING NODEMAILER
+    await sendEmail({
+      from: {
+        name: "Next pizza",
+        address: "noreply@example.com",
+      },
+      to: {
+        name: data.firstName + " " + data.lastName,
+        address: data.email,
+      },
+      subject: "Next pizza | Оплата заказа",
+      html: PayOrderTemplate(newOrder.id, newOrder.totalCost, paymentUrl),
+    });
+    return process.env.URL;
   } catch (error) {
     console.log("CREATE ORDER ERROR", error);
   }
@@ -167,11 +180,24 @@ export async function registerUser(body: Prisma.UserCreateInput) {
         userId: createdUser.id,
       },
     });
-    await sendEmail(
-      createdUser.email,
-      "Next pizza | Registration confirmation",
-      VerificationTemplate({ code: verificationCode })
-    );
+    // await sendEmail(
+    //   createdUser.email,
+    //   "Next pizza | Registration confirmation",
+    //   VerificationTemplate({ code: verificationCode })
+    // );
+    // NOW USING NODEMAILER
+    await sendEmail({
+      from: {
+        name: "Next pizza",
+        address: "noreply@example.com",
+      },
+      to: {
+        name: createdUser.fullName,
+        address: createdUser.email,
+      },
+      subject: "Next pizza | Подтверждение регистрации",
+      html: VerificationTemplate(verificationCode),
+    });
   } catch (error) {
     console.log("CREATE USER ERROR", error);
   }

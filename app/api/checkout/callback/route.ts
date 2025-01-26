@@ -2,7 +2,7 @@ import { PaymentCallbackData } from "@/@types/yookassa";
 import { OrderSucessTemplate } from "@/components/shared/checkout/email/OrderSucessTemplate";
 import { prisma } from "@/prisma/client";
 import { sendEmail } from "@/shared/lib";
-import { CartItemDTO } from "@/shared/services/dto/cart.dto";
+// import { CartItemDTO } from "@/shared/services/dto/cart.dto";
 import { OrderStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -31,14 +31,27 @@ export async function POST(req: NextRequest) {
           : OrderStatus.CANCELLED,
       },
     });
-    const items = JSON.parse(order.items as string) as CartItemDTO[];
+    // const items = JSON.parse(order.items as string) as CartItemDTO[];
 
     if (isPaymentSucceeded) {
-      await sendEmail(
-        order.email,
-        "Nxet pizza | Success",
-        OrderSucessTemplate({ orderId: order.id, items })
-      );
+      // await sendEmail(
+      //   order.email,
+      //   "Nxet pizza | Success",
+      //   OrderSucessTemplate({ orderId: order.id, items })
+      // );
+      // NOW USING NODEMAILER
+      await sendEmail({
+        from: {
+          name: "Next pizza",
+          address: "noreply@example.com",
+        },
+        to: {
+          name: order.fullName,
+          address: order.email,
+        },
+        subject: "Next pizza | Спасибо за заказ",
+        html: OrderSucessTemplate(order.id, order.totalCost),
+      });
     } else {
       //send email about failed payment
     }

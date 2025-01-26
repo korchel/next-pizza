@@ -22,7 +22,7 @@ export const createPayment = async (details: PaymentDetails) => {
       },
       confirmation: {
         type: "redirect",
-        return_url: process.env.YOOKASSA_CALLBACK_URL,
+        return_url: process.env.URL + "?paid",
       },
     },
     {
