@@ -1,5 +1,3 @@
-"use client";
-
 import { FC } from "react";
 import { WhiteBlock } from "../WhiteBlock";
 import { FormTextarea } from "../form";

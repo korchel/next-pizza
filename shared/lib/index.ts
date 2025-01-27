@@ -2,6 +2,7 @@ export { cn } from "./utils";
 export { calcPizzaPrice } from "./calcPizzaPrice";
 export { createPayment } from "./createPayment";
 export { findOrCreateCart } from "./findOrCreateCart";
+export { getAdresses } from "./getAdresses";
 export { getAvailablePizzaSizes } from "./getAvailablePizzaSizes";
 export { getCartItemDetails } from "./getCartItemDetails";
 export * from "./getCartDetails";

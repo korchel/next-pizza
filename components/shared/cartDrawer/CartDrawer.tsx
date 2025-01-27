@@ -46,7 +46,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
                 height={120}
               />
               <Title
-                text="Cart is empty"
+                text="Корзина пуста"
                 size="sm"
                 className="text-center font-bold my-2"
               />

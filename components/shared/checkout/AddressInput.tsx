@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { useDebounce } from "react-use";
 
 import { FormInput } from "../form/FormInput";
-import { cn } from "@/shared/lib";
+import { cn, getAdresses } from "@/shared/lib";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -21,21 +21,10 @@ export const AddressInput: React.FC<Props> = ({ className }) => {
   const value = watch(name);
 
   useDebounce(
-    () => {
+    async () => {
       if (!isValueSet) {
-        fetch(process.env.DADATA_URL as string, {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Token " + process.env.DADATA_TOKEN,
-          },
-          body: JSON.stringify({ query: value }),
-        })
-          .then((response) => response.json())
-          .then((results) => setResults(results.suggestions))
-          .catch((error) => console.log(error));
+        const adresses = await getAdresses(value);
+        setResults(adresses);
       }
     },
     1000,

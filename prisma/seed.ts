@@ -64,9 +64,11 @@ async function up() {
 
   const pizza1 = await prisma.product.create({
     data: {
-      name: "Чоризо фреш",
+      name: "Чоризо",
       imageUrl: "/pizzas/Чоризо фреш.avif",
       categoryId: 1,
+      description:
+        "Острые колбаски чоризо, сладкий перец, моцарелла, фирменный томатный соус",
       ingredients: {
         connect: ingredients.slice(10),
       },
@@ -78,6 +80,8 @@ async function up() {
       name: "Овощи и грибы",
       imageUrl: "/pizzas/Овощи и грибы.avif",
       categoryId: 1,
+      description:
+        "Шампиньоны, томаты, сладкий перец, красный лук, кубики брынзы, моцарелла, фирменный томатный соус, итальянские травы",
       ingredients: {
         connect: ingredients.slice(5, 10),
       },
@@ -89,6 +93,7 @@ async function up() {
       name: "Песто",
       imageUrl: "/pizzas/Песто.avif",
       categoryId: 1,
+      description: "Цыпленок, соус песто, брынза, томаты, моцарелла",
       ingredients: {
         connect: ingredients.slice(0, 5),
       },
@@ -100,6 +105,7 @@ async function up() {
       name: "Сырная",
       imageUrl: "/pizzas/Сырная.avif",
       categoryId: 1,
+      description: "Моцарелла, сыры чеддер и пармезан",
       ingredients: {
         connect: ingredients.slice(10, 20),
       },
