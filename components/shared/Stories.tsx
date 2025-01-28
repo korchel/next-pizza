@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import ReactStories from "react-insta-stories";
 import Image from "next/image";
 
-import { Container } from "../ui";
+import { ArrowButton, Container } from "../ui";
 import { cn } from "@/shared/lib/utils";
 import { api } from "@/shared/services/apiClient";
 import { IStory } from "@/shared/services/stories";
@@ -18,6 +18,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
   const [stories, setStories] = useState<IStory[]>([]);
   const [open, setOpen] = useState(false);
   const [selectedStory, setSelectedStory] = useState<IStory>();
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     async function fetchStories() {
@@ -36,33 +37,52 @@ export const Stories: React.FC<Props> = ({ className }) => {
     }
   };
 
+  const handleScroll = (direction: "right" | "left") => {
+    if (direction === "left" && ref.current) {
+      ref.current.scrollLeft -= 200;
+    }
+    if (direction === "right" && ref.current) {
+      ref.current.scrollLeft += 200;
+    }
+  };
+
   return (
     <>
-      <Container
-        className={cn(
-          "flex items-center justify-between gap-2 my-10",
-          className
-        )}
-      >
-        {stories.length === 0 &&
-          [...Array(6)].map((_, index) => (
-            <div
-              key={index}
-              className="w-[200px] h-[250px] bg-gray-200 rounded-md animate-pulse"
+      <Container className={cn("my-10 relative", className)}>
+        <ArrowButton
+          direction="left"
+          className="absolute top-1/3"
+          onClick={() => handleScroll("left")}
+        />
+        <div
+          ref={ref}
+          className="overflow-auto  flex items-center justify-between gap-2"
+        >
+          {stories.length === 0 &&
+            [...Array(6)].map((_, index) => (
+              <div
+                key={index}
+                className="w-[200px] h-[250px] bg-gray-200 rounded-md animate-pulse"
+              />
+            ))}
+
+          {stories.map((story) => (
+            <Image
+              key={story.id}
+              alt={"story"}
+              onClick={() => onClickStory(story)}
+              className="rounded-md cursor-pointer"
+              height={250}
+              width={200}
+              src={story.previewImageUrl}
             />
           ))}
-
-        {stories.map((story) => (
-          <Image
-            key={story.id}
-            alt={"story"}
-            onClick={() => onClickStory(story)}
-            className="rounded-md cursor-pointer"
-            height={250}
-            width={200}
-            src={story.previewImageUrl}
-          />
-        ))}
+        </div>
+        <ArrowButton
+          direction="right"
+          className="absolute right-0 top-1/3"
+          onClick={() => handleScroll("right")}
+        />
 
         {open && (
           <div className="absolute left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
