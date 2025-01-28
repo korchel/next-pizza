@@ -12,13 +12,14 @@ export const ArrowButton: FC<Props> = ({ direction, className, ...props }) => {
   const arrows = {
     right: <ChevronRight />,
     left: <ChevronLeft />,
-    ...props,
   };
   return (
     <button
       className={cn(
         className,
-        "rounded-full h-10 w-10 shadow-lg flex items-center justify-center bg-white hover:bg-gray-200 z-10 text-gray-500"
+        `flex items-center justify-center
+        rounded-full h-10 w-10 shadow-lg z-10
+        bg-white hover:bg-gray-200  text-gray-500`
       )}
       {...props}
     >

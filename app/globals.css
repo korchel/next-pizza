@@ -48,6 +48,12 @@ html {
   font-family: var(--font-nunito), sans-serif;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .scrollbar::-webkit-scrollbar {
   width: 4px;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import ReactStories from "react-insta-stories";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import { ArrowButton, Container } from "../ui";
 import { cn } from "@/shared/lib/utils";
 import { api } from "@/shared/services/apiClient";
 import { IStory } from "@/shared/services/stories";
+import { useHorizantalScroll } from "@/shared/hooks";
 
 interface Props {
   className?: string;
@@ -18,45 +19,37 @@ export const Stories: React.FC<Props> = ({ className }) => {
   const [stories, setStories] = useState<IStory[]>([]);
   const [open, setOpen] = useState(false);
   const [selectedStory, setSelectedStory] = useState<IStory>();
-  const ref = useRef<HTMLDivElement | null>(null);
+  const { ref, handleScroll, scroll, right, left } = useHorizantalScroll();
 
   useEffect(() => {
     async function fetchStories() {
       const data = await api.stories.getAll();
       setStories(data);
     }
-
     fetchStories();
   }, []);
 
   const onClickStory = (story: IStory) => {
     setSelectedStory(story);
-
     if (story.items.length > 0) {
       setOpen(true);
-    }
-  };
-
-  const handleScroll = (direction: "right" | "left") => {
-    if (direction === "left" && ref.current) {
-      ref.current.scrollLeft -= 200;
-    }
-    if (direction === "right" && ref.current) {
-      ref.current.scrollLeft += 200;
     }
   };
 
   return (
     <>
       <Container className={cn("my-10 relative", className)}>
-        <ArrowButton
-          direction="left"
-          className="absolute top-1/3"
-          onClick={() => handleScroll("left")}
-        />
+        {left && (
+          <ArrowButton
+            direction="left"
+            className="absolute top-[105px]"
+            onClick={() => scroll("left")}
+          />
+        )}
         <div
           ref={ref}
-          className="overflow-auto  flex items-center justify-between gap-2"
+          className="overflow-auto no-scrollbar flex items-center justify-between gap-2"
+          onScroll={handleScroll}
         >
           {stories.length === 0 &&
             [...Array(6)].map((_, index) => (
@@ -78,11 +71,13 @@ export const Stories: React.FC<Props> = ({ className }) => {
             />
           ))}
         </div>
-        <ArrowButton
-          direction="right"
-          className="absolute right-0 top-1/3"
-          onClick={() => handleScroll("right")}
-        />
+        {right && (
+          <ArrowButton
+            direction="right"
+            className="absolute right-0 top-[105px]"
+            onClick={() => scroll("right")}
+          />
+        )}
 
         {open && (
           <div className="absolute left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
