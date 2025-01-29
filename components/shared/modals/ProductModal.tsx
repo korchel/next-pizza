@@ -2,6 +2,7 @@
 
 import { FC } from "react";
 import { useRouter } from "next/navigation";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 import { Dialog } from "@/components/ui";
 import { Ingredient, Product, ProductVariant } from "@prisma/client";
@@ -17,7 +18,15 @@ export const ProductModal: FC<Props> = ({ product }) => {
 
   return (
     <Dialog.Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
-      <Dialog.DialogContent className="p-0 w-[1060px] max-w-[1060] min-h-[550px] bg-white overflow-hidden">
+      <VisuallyHidden>
+        <Dialog.DialogTitle>Информация о продукте и заказ</Dialog.DialogTitle>
+      </VisuallyHidden>
+      <VisuallyHidden>
+        <Dialog.DialogDescription>
+          Информация о продукте и заказ
+        </Dialog.DialogDescription>
+      </VisuallyHidden>
+      <Dialog.DialogContent className="p-0  lg:min-w-[1000px] min-h-[550px] bg-white overflow-hidden">
         <ProductInfo product={product} close={() => router.back()} />
       </Dialog.DialogContent>
     </Dialog.Dialog>

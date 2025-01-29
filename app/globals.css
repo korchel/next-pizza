@@ -72,6 +72,24 @@ html {
   background: #dbdadd;
 }
 
+.scrollbar-horizontal::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background: #fff;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-thumb {
+  background: #dbdadd;
+  border-radius: 6px;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-thumb:hover {
+  background: #dbdadd;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

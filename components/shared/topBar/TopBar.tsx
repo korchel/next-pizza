@@ -16,10 +16,10 @@ export const TopBar: FC<Props> = ({ categories, className }) => {
     <div
       className={cn(
         className,
-        "sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-10"
+        "sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-20"
       )}
     >
-      <Container>
+      <Container className="">
         <Categories items={categories} />
         {/* <SortPopup /> */}
       </Container>

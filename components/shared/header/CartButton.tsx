@@ -20,8 +20,8 @@ export const CartButton: FC<Props> = ({ className }) => {
         loading={loading}
         className={cn(className, { "w-[105px]": loading }, "group relative")}
       >
-        <b>{totalCost} p</b>
-        <span className="h-full w-[1px] bg-white/30 mx-3" />
+        <b className="hidden sm:block">{totalCost} ₽</b>
+        <span className="h-full w-[1px] bg-white/30 mx-3 hidden sm:block" />
         <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
           <ShoppingCart size={16} strokeWidth={2} />
           <b>{items.length}</b>

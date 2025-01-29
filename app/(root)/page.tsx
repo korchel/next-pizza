@@ -26,14 +26,12 @@ export default async function Home({
           (category) => category.products.length > 0
         )}
       />
-      <Stories />
+      <Stories className="hidden sm:block" />
       <Container className="pb-14 mt-10">
-        <div className="flex gap-[80px]">
-          <div className="w-[205px]">
-            <Suspense>
-              <Filters />
-            </Suspense>
-          </div>
+        <div className="flex flex-col sm:flex-row gap-10 md:gap-20">
+          <Suspense>
+            <Filters />
+          </Suspense>
           <div className="flex-1">
             <div className="flex flex-col gap-16">
               {categories.map(

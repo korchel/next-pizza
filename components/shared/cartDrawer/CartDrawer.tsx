@@ -31,6 +31,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
     <div>
       <Sheet.Sheet>
         <Sheet.SheetTrigger asChild>{children}</Sheet.SheetTrigger>
+        <Sheet.SheetDescription>Превью корзины</Sheet.SheetDescription>
         <Sheet.SheetContent
           className={cn(
             "flex flex-col justify-between pb-0 bg-[#F4F1EE]",

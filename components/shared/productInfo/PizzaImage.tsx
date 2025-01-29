@@ -20,7 +20,7 @@ export const PizzaImage: FC<Props> = ({ className, imageUrl, size, name }) => {
     <div
       className={cn(
         className,
-        "flex items-center justify-center flex-1 relative"
+        "lg:flex items-center justify-center flex-1 relative"
       )}
     >
       <Image

@@ -22,13 +22,35 @@ export const ProductCard: FC<Props> = ({
   description,
 }) => {
   return (
-    <Link href={Routes.PRODUCT + `/${id}`} className="flex flex-col">
-      <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-        <Image width={215} height={215} src={imageUrl} alt={name} />
+    <Link
+      href={Routes.PRODUCT + `/${id}`}
+      className="flex sm:flex-col gap-2 md:gap-0"
+    >
+      <div
+        className="w-16 sm:w-full flex flex-shrink-0 justify-center items-center
+        md:p-6 sm:bg-secondary rounded-lg"
+      >
+        <Image
+          width={215}
+          height={215}
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto",
+          }}
+          src={imageUrl}
+          alt={name}
+        />
       </div>
-      <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
-      <p className="text-sm text-gray-400">{description}</p>
-      <div className="flex justify-between items-center mt-auto">
+      <div>
+        <Title text={name} size="sm" className="mb-1 md:mt-3 font-bold" />
+        <p className="text-sm text-gray-400">{description}</p>
+      </div>
+
+      <div
+        className="flex flex-col items-center justify-between ml-auto 
+        sm:flex-row md:mt-auto sm:ml-0"
+      >
         <span>
           От <b>{price} ₽</b>
         </span>

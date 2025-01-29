@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { FC } from "react";
+import { FC, useState } from "react";
 import qs from "qs";
 
 import { cn } from "@/shared/lib/utils";
-import { Title, Input } from "../../ui";
+import { Title, Input, Button } from "../../ui";
 import { RangeSlider } from "./RangeSlider";
 import { CheckboxFiltersGroup } from "./CheckboxFiltersGroup";
 import { useGetIngredients } from "@/shared/hooks/useGetIngredients";
@@ -22,6 +22,7 @@ interface IPriceRange {
 export const Filters: FC<Props> = ({ className }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isVisibleOnSmall, setVisibleOnSmall] = useState(false);
 
   const chosenPriceRange = {
     from: searchParams?.get("from"),
@@ -95,74 +96,91 @@ export const Filters: FC<Props> = ({ className }) => {
   };
 
   return (
-    <div className={cn(className)}>
-      <Title text="Фильтры" size="sm" className="mb-5 font-bold" />
-      <CheckboxFiltersGroup
-        name="pizzaTypes"
-        title="Тип теста"
-        className="mb-5"
-        selected={chosenPizzaTypes || []}
-        items={[
-          { text: "Тонкое", value: "1" },
-          { text: "Традиционное", value: "2" },
-        ]}
-        onCheck={onTogglePizzaType}
-      />
-      <CheckboxFiltersGroup
-        name="sizes"
-        title="Размер"
-        className="mb-5"
-        selected={chosenPizzaSizes}
-        items={[
-          { text: "20см", value: "20" },
-          { text: "30см", value: "30" },
-          { text: "40см", value: "40" },
-        ]}
-        onCheck={onTogglePizzaSize}
-      />
-      <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
-        <p>Price from to</p>
-        <div className="flex gap-3 mb-5">
-          <Input
-            type="number"
-            placeholder="0"
+    <>
+      <Button
+        variant="outline"
+        className="sm:hidden ml-auto"
+        onClick={() =>
+          setVisibleOnSmall(() => (isVisibleOnSmall ? false : true))
+        }
+      >
+        Фильтры
+      </Button>
+      <div
+        className={cn(
+          className,
+          "w-[205px] sm:block",
+          !isVisibleOnSmall && "hidden"
+        )}
+      >
+        <Title text="Фильтры" size="sm" className="mb-5 font-bold" />
+        <CheckboxFiltersGroup
+          name="pizzaTypes"
+          title="Тип теста"
+          className="mb-5"
+          selected={chosenPizzaTypes || []}
+          items={[
+            { text: "Тонкое", value: "1" },
+            { text: "Традиционное", value: "2" },
+          ]}
+          onCheck={onTogglePizzaType}
+        />
+        <CheckboxFiltersGroup
+          name="sizes"
+          title="Размер"
+          className="mb-5"
+          selected={chosenPizzaSizes}
+          items={[
+            { text: "20см", value: "20" },
+            { text: "30см", value: "30" },
+            { text: "40см", value: "40" },
+          ]}
+          onCheck={onTogglePizzaSize}
+        />
+        <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
+          <p>Price from to</p>
+          <div className="flex gap-3 mb-5">
+            <Input
+              type="number"
+              placeholder="0"
+              min={0}
+              max={1000}
+              value={chosenPriceRange.from || 0}
+              onChange={(e) => changePriceRange("from", +e.target.value)}
+            />
+            <Input
+              type="number"
+              placeholder="1000"
+              min={100}
+              max={1000}
+              value={chosenPriceRange.to || 1000}
+              onChange={(e) => changePriceRange("to", +e.target.value)}
+            />
+          </div>
+          <RangeSlider
             min={0}
             max={1000}
-            value={chosenPriceRange.from || 0}
-            onChange={(e) => changePriceRange("from", +e.target.value)}
-          />
-          <Input
-            type="number"
-            placeholder="1000"
-            min={100}
-            max={1000}
-            value={chosenPriceRange.to || 1000}
-            onChange={(e) => changePriceRange("to", +e.target.value)}
+            step={10}
+            value={[
+              +(chosenPriceRange.from || 0),
+              +(chosenPriceRange.to || 1000),
+            ]}
+            onValueChange={onSliderMove}
           />
         </div>
-        <RangeSlider
-          min={0}
-          max={1000}
-          step={10}
-          value={[
-            +(chosenPriceRange.from || 0),
-            +(chosenPriceRange.to || 1000),
-          ]}
-          onValueChange={onSliderMove}
+        <CheckboxFiltersGroup
+          name="ingredients"
+          title="Ингредиенты"
+          className="mt-5"
+          limit={6}
+          defaultItems={displayIngredients.slice(0, 6)}
+          items={displayIngredients}
+          loading={loading}
+          onCheck={onToggleIngredient}
+          selected={chosenIngredientIds}
         />
       </div>
-      <CheckboxFiltersGroup
-        name="ingredients"
-        title="Ингредиенты"
-        className="mt-5"
-        limit={6}
-        defaultItems={displayIngredients.slice(0, 6)}
-        items={displayIngredients}
-        loading={loading}
-        onCheck={onToggleIngredient}
-        selected={chosenIngredientIds}
-      />
-    </div>
+    </>
   );
 };
 

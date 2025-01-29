@@ -58,8 +58,13 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
 
   return (
     <div className={cn(className, "flex flex-1")}>
-      <PizzaImage imageUrl={imageUrl} size={size} name={name} />
-      <div className="w-[490px] bg-[#f7f6f5] p-7">
+      <PizzaImage
+        imageUrl={imageUrl}
+        size={size}
+        name={name}
+        className="hidden"
+      />
+      <div className="w-full lg:w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
         <p className="text-gray-400">{`${size} см, ${typesMap[type]}`}</p>
         <PizzaTypeSelector

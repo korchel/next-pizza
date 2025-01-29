@@ -67,6 +67,10 @@ export const Stories: React.FC<Props> = ({ className }) => {
               className="rounded-md cursor-pointer"
               height={250}
               width={200}
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               src={story.previewImageUrl}
             />
           ))}
@@ -86,7 +90,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
                 className="absolute -right-10 -top-5 z-30"
                 onClick={() => setOpen(false)}
               >
-                <X className="absolute top-0 right-0 w-8 h-8 text-white/50" />
+                <X className="absolute top-0 right-0 w-8 h-8 text-gray-300" />
               </button>
 
               <ReactStories

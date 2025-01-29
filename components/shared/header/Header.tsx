@@ -3,7 +3,6 @@
 import { FC, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
-import Image from "next/image";
 import Link from "next/link";
 
 import { cn } from "@/shared/lib/utils";
@@ -51,19 +50,17 @@ export const Header: FC<IHeaderProps> = ({
   return (
     <header className={cn("border-b", className)}>
       <Container className="flex items-center justify-between py-8">
-        <div className="flex items-center gap-4">
-          <Image src="/logo.png" alt="logo" width={35} height={35} />
-          <Link href="/">
-            <div>
-              <h1 className="text-2xl uppercase font-black">Next Pizza</h1>
-              <p className="text-sm text-gray-400 leading-3">
-                Вкуснее уже некуда
-              </p>
-            </div>
-          </Link>
-        </div>
+        <Link href="/" className="flex items-center gap-4">
+          <img src="/logo.png" alt="logo" className="h-[35px] w-[35px]" />
+          <div className="hidden sm:block">
+            <h1 className="text-2xl uppercase font-black">Next Pizza</h1>
+            <p className="text-sm text-gray-400 leading-3">
+              Вкуснее уже некуда
+            </p>
+          </div>
+        </Link>
         {hasSearch && (
-          <div className="mx-10 flex-1">
+          <div className="mx-2 md:mx-10 flex-1">
             <SearchInput />
           </div>
         )}

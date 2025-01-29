@@ -38,6 +38,7 @@ export const AddressInput: React.FC<Props> = ({ className }) => {
         className="text-base"
         placeholder="Адрес"
         required={true}
+        autoComplete="nope"
         onChange={(e) => {
           setValue(name, e.target.value);
           setValueSet(false);

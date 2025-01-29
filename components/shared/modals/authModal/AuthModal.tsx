@@ -2,6 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import { FC, useState } from "react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 import { Button, Dialog } from "@/components/ui";
 import { LoginForm } from "./LoginForm";
@@ -26,6 +27,14 @@ export const AuthModal: FC<Props> = ({ isOpen, close }) => {
 
   return (
     <Dialog.Dialog open={isOpen} onOpenChange={handleClose}>
+      <VisuallyHidden>
+        <Dialog.DialogTitle>Вход в аккаунт или регистрация</Dialog.DialogTitle>
+      </VisuallyHidden>
+      <VisuallyHidden>
+        <Dialog.DialogDescription>
+          Вход в аккаунт или регистрация
+        </Dialog.DialogDescription>
+      </VisuallyHidden>
       <Dialog.DialogContent className="w-[450px] bg-white p-10">
         {formType === "login" ? (
           <LoginForm close={handleClose} />

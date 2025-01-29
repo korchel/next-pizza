@@ -44,7 +44,7 @@ export const ProductsGroupList: FC<Props> = ({
       <Title text={title} size="lg" className="font-extrabold mb-5" />
       <div
         className={cn(
-          "grid lg:grid-cols-2 xl:grid-cols-3 gap-[50px]",
+          "grid md:grid-cols-2 xl:grid-cols-3 gap-[50px]",
           listClassName
         )}
       >

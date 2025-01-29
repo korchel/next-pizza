@@ -56,6 +56,7 @@ export const PhoneInput: FC<Props> = ({
           render={({ field }) => (
             <MaskedStiledInput
               {...field}
+              autoComplete="nope"
               value={field.value}
               ref={ref}
               unmask={false}
