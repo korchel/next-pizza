@@ -68,7 +68,7 @@ export default function CheckoutPage() {
     try {
       setSubmitting(true);
       const url = await createOrder(data);
-      toast.success("Заказ создан");
+      toast.success("Заказ создан. Проверьте почту для оплаты заказа", {});
       if (url) {
         location.href = url;
       }

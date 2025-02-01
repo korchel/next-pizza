@@ -118,6 +118,7 @@ export async function createOrder(data: CheckoutFormType) {
     return process.env.URL;
   } catch (error) {
     console.log("CREATE ORDER ERROR", error);
+    throw new Error("CREATE ORDER ERROR");
   }
 }
 
