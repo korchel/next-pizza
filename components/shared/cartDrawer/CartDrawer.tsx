@@ -67,7 +67,14 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
               <Sheet.SheetHeader>
                 <Sheet.SheetTitle>
                   В корзине{" "}
-                  <span className="font-bold">{items.length} товаров</span>
+                  <span className="font-bold">
+                    {items.length}{" "}
+                    {items.length === 1
+                      ? "товар"
+                      : items.length < 5
+                      ? "товара"
+                      : "товаров"}
+                  </span>
                 </Sheet.SheetTitle>
               </Sheet.SheetHeader>
               <div className="-mx-6 mt-5 overflow-hidden flex-1">
