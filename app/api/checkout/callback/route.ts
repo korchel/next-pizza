@@ -52,6 +52,7 @@ export async function POST(req: NextRequest) {
         subject: "Next pizza | Спасибо за заказ",
         html: OrderSucessTemplate(order.id, order.totalCost),
       });
+      return NextResponse.json({ status: 200 });
     } else {
       //send email about failed payment
     }
