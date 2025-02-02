@@ -19,15 +19,14 @@ export const AddressInput: React.FC<Props> = ({ className }) => {
   const name = "address";
 
   const value = watch(name);
-
   useDebounce(
     async () => {
-      if (!isValueSet) {
+      if (!isValueSet && value) {
         const adresses = await getAdresses(value);
         setResults(adresses);
       }
     },
-    1000,
+    500,
     [value]
   );
 
