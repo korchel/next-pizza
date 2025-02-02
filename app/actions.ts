@@ -92,7 +92,7 @@ export async function createOrder(data: CheckoutFormType) {
     });
 
     const paymentUrl = paymentData.confirmation.confirmation_url;
-
+    console.log("PAYMENT URL", paymentUrl);
     // await sendEmail(
     //   data.email,
     //   "Next Pizza | order #" + newOrder.id,
