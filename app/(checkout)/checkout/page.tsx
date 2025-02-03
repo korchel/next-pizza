@@ -81,7 +81,7 @@ export default function CheckoutPage() {
 
   return (
     <Container className="mt-10">
-      <Title text="Order" size="lg" className="font-extrabold mb-8" />
+      <Title text="Заказ" size="lg" className="font-extrabold mb-8" />
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex gap-5 md:gap-10 flex-col lg:flex-row">
