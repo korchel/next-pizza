@@ -19,7 +19,7 @@ export const TopBar: FC<Props> = ({ categories, className }) => {
         "sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-20"
       )}
     >
-      <Container className="">
+      <Container>
         <Categories items={categories} />
         {/* <SortPopup /> */}
       </Container>

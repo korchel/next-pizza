@@ -36,21 +36,22 @@ export const CheckoutCartItem: React.FC<Props> = ({
         className
       )}
     >
-      <div className="flex items-center gap-5 flex-1">
+      <div className="flex items-center gap-1 sm:gap-5 flex-1">
         <CartItem.Picture src={imageUrl} alt={name} />
         <CartItem.Info name={name} details={details} />
       </div>
+      <div className="flex flex-col gap-2">
+        <CartItem.Price value={price} className="ml-auto" />
 
-      <CartItem.Price value={price} className="mx-auto" />
-
-      <div className="flex items-center gap-5 ml-5 md:ml-20">
-        <CartItem.Counter onClick={clickCounter} value={quantity} />
-        <button type="button" onClick={removeItem}>
-          <X
-            className="text-gray-400 cursor-pointer hover:text-gray-600"
-            size={20}
-          />
-        </button>
+        <div className="flex items-center gap-5 ml-5 md:ml-20">
+          <CartItem.Counter onClick={clickCounter} value={quantity} />
+          <button type="button" onClick={removeItem}>
+            <X
+              className="text-gray-400 cursor-pointer hover:text-gray-600"
+              size={20}
+            />
+          </button>
+        </div>
       </div>
     </div>
   );

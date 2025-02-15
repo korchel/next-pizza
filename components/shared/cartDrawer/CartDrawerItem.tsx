@@ -24,7 +24,7 @@ export const CartDrawerItem: FC<Props> = ({
   return (
     <div
       className={cn(
-        "flex bg-white p-5 gap-6",
+        "flex bg-white p-5 sm:gap-6",
         { "opacity-50 pointer-events-none": disabled },
         className
       )}
@@ -33,7 +33,7 @@ export const CartDrawerItem: FC<Props> = ({
       <div className="flex-1">
         <CartIem.Info name={name} details={details} />
         <hr className="my-3" />
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-1">
           <CartIem.Counter onClick={clickCounter} value={quantity} />
           <div className="flex items-center gap-3">
             <CartIem.Price value={price} />

@@ -78,7 +78,7 @@ export const PizzaForm: FC<IPizzaFormProps> = ({
           onClick={(value) => setType(Number(value) as PizzaType)}
         />
         <div className="pg-gray-50 p-5 mt-5 rounded-md h-[420px] overflow-auto scrollbar">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {ingredients.map((ingredient) => (
               <IngredientTag
                 key={ingredient.id}

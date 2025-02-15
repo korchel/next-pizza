@@ -26,7 +26,9 @@ export const WhiteBlock: FC<PropsWithChildren<Props>> = ({
         </div>
       )}
 
-      <div className={cn("px-5 py-4", contentClassName)}>{children}</div>
+      <div className={cn("p-4 sm:px-5 sm:py-4", contentClassName)}>
+        {children}
+      </div>
     </div>
   );
 };

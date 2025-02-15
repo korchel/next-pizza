@@ -1,5 +1,5 @@
-import { cn } from '@/shared/lib/utils';
-import { FC } from 'react';
+import { cn } from "@/shared/lib/utils";
+import { FC } from "react";
 
 interface Props {
   value: number;
@@ -7,5 +7,5 @@ interface Props {
 }
 
 export const Price: FC<Props> = ({ value, className }) => {
-  return <h2 className={cn('font-bold', className)}>{value} ₽</h2>;
+  return <h2 className={cn("font-bold text-nowrap", className)}>{value} ₽</h2>;
 };

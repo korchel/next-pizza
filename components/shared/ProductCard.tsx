@@ -44,7 +44,9 @@ export const ProductCard: FC<Props> = ({
       </div>
       <div>
         <Title text={name} size="sm" className="mb-1 md:mt-3 font-bold" />
-        <p className="text-sm text-gray-400">{description}</p>
+        <p className="text-sm text-gray-400 line-clamp-2 sm:line-clamp-none">
+          {description}
+        </p>
       </div>
 
       <div

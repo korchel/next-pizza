@@ -48,7 +48,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
         )}
         <div
           ref={ref}
-          className="overflow-auto no-scrollbar flex items-center justify-between gap-2"
+          className="overflow-auto no-scrollbar scroll-smooth flex items-center justify-between gap-2"
           onScroll={handleScroll}
         >
           {stories.length === 0 &&

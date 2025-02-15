@@ -24,7 +24,7 @@ export default function CheckoutRedirectPage() {
 
   return (
     <div className="text-center font-bold">
-      <div>Вам на почту отправлена ссылка на оплату.</div>
+      <div>На Вашу почту отправлена ссылка на оплату.</div>
       <div>
         Вы будете перенаправлены на главную страницу через{" "}
         <span className="text-primary">{countDown}</span>

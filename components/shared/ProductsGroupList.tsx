@@ -40,7 +40,11 @@ export const ProductsGroupList: FC<Props> = ({
   }, [intersection?.isIntersecting]);
 
   return (
-    <div className={cn(className)} id={`${categoryId}`} ref={intersectionRef}>
+    <div
+      className={cn(className, "scroll-m-28")}
+      id={`${categoryId}`}
+      ref={intersectionRef}
+    >
       <Title text={title} size="lg" className="font-extrabold mb-5" />
       <div
         className={cn(

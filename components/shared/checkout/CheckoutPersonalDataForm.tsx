@@ -10,7 +10,7 @@ interface Props {
 export const CheckoutPersonalDataForm: FC<Props> = ({ className }) => {
   return (
     <WhiteBlock title="2. Данные пользователя" className={className}>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid sm:grid-cols-2 gap-5">
         <FormInput name="firstName" className="text-base" placeholder="Имя" />
         <FormInput
           name="lastName"

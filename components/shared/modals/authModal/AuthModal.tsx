@@ -35,7 +35,7 @@ export const AuthModal: FC<Props> = ({ isOpen, close }) => {
           Вход в аккаунт или регистрация
         </Dialog.DialogDescription>
       </VisuallyHidden>
-      <Dialog.DialogContent className="w-[450px] bg-white p-10">
+      <Dialog.DialogContent className="w-[400px] sm:w-[450px] bg-white p-10">
         {formType === "login" ? (
           <LoginForm close={handleClose} />
         ) : (
