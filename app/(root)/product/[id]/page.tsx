@@ -32,7 +32,7 @@ export default async function ProductModalPage({
   }
 
   return (
-    <Container className="flex flex-col my-10">
+    <Container className="flex flex-col my-5">
       <ProductInfo product={product} />
     </Container>
   );

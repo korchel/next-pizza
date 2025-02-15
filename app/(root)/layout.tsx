@@ -16,12 +16,14 @@ export default function RootLayout({
   modal: React.ReactNode;
 }>) {
   return (
-    <main className="min-h-screen">
+    <>
       <Suspense>
         <Header />
       </Suspense>
-      {children}
-      {modal}
-    </main>
+      <main className="h-min-screen">
+        {children}
+        {modal}
+      </main>
+    </>
   );
 }

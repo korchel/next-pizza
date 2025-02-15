@@ -12,7 +12,7 @@ export const Container: FC<Props> = ({ className, children }) => {
     <div
       className={cn(
         `mx-auto px-2 sm:px-3 md:px-4 lg-px-5
-        max-w-[480px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px]`,
+        max-w-[420px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px]`,
         className
       )}
     >

@@ -68,7 +68,6 @@ export default function CheckoutPage() {
     try {
       setSubmitting(true);
       const url = await createOrder(data);
-      toast.success("Заказ создан. Проверьте почту для оплаты заказа", {});
       if (url) {
         location.href = url;
       }
@@ -80,12 +79,12 @@ export default function CheckoutPage() {
   };
 
   return (
-    <Container className="mt-10">
+    <Container>
       <Title text="Заказ" size="lg" className="font-extrabold mb-8" />
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex gap-5 md:gap-10 flex-col lg:flex-row">
-            <div className="flex flex-col gap-5 md:gap-10 flex-1 lg:mb-20">
+            <div className="flex flex-col gap-5 md:gap-10 flex-1">
               <CheckoutCart
                 items={items}
                 removeCartItem={removeCartItem}

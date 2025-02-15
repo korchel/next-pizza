@@ -115,7 +115,7 @@ export async function createOrder(data: CheckoutFormType) {
       subject: "Next pizza | Оплата заказа",
       html: PayOrderTemplate(newOrder.id, newOrder.totalCost, paymentUrl),
     });
-    return "/";
+    return "/checkout/redirect";
   } catch (error) {
     console.log("CREATE ORDER ERROR", error);
     throw new Error("CREATE ORDER ERROR");

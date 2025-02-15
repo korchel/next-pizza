@@ -15,17 +15,17 @@ export default function CheckoutLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen bg-[#F4F1EE]">
-      <Container>
-        <Suspense>
-          <Header
-            hasSearch={false}
-            hasCart={false}
-            className="border-b-gray-200"
-          />
-        </Suspense>
-        {children}
-      </Container>
-    </main>
+    <>
+      <Suspense>
+        <Header
+          hasSearch={false}
+          hasCart={false}
+          className="bg-[#F4F1EE] marker:border-b-gray-200 fixed w-full z-10"
+        />
+      </Suspense>
+      <main className="bg-[#F4F1EE] min-h-screen pt-32 pb-10">
+        <Container>{children}</Container>
+      </main>
+    </>
   );
 }
