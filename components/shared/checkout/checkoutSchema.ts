@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 export const checkoutSchema = z.object({
-  firstName: z.string().min(2, { message: "At least 2 characters" }),
-  lastName: z.string().min(2, { message: "At least 2 characters" }),
-  email: z.string().email({ message: "Enter correct e-mail" }),
-  phone: z.string().min(10, { message: "Enter correct phone number" }),
-  address: z.string().min(5, { message: "Enter correct address" }),
+  firstName: z.string().min(2, { message: "Не менее 2 символов" }),
+  lastName: z.string().min(2, { message: "Не менее 2 символов" }),
+  email: z.string().email({ message: "Введите корректный e-mail" }),
+  phone: z.string().min(10, { message: "Введите корректный номер" }),
+  address: z.string().min(5, { message: "Введите корректный адрес" }),
   comment: z.string().optional(),
 });
 

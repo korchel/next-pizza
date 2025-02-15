@@ -118,7 +118,7 @@ export async function createOrder(data: CheckoutFormType) {
     return "/checkout/redirect";
   } catch (error) {
     console.log("CREATE ORDER ERROR", error);
-    throw new Error("CREATE ORDER ERROR");
+    throw error;
   }
 }
 
@@ -146,6 +146,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
     });
   } catch (error) {
     console.log("UPDATE USER ERROR", error);
+    throw error;
   }
 }
 
@@ -163,6 +164,7 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 
       throw new Error("User already exists");
     }
+
     const password = await hash(body.password as string, 10);
     const createdUser = await prisma.user.create({
       data: {
@@ -201,5 +203,6 @@ export async function registerUser(body: Prisma.UserCreateInput) {
     });
   } catch (error) {
     console.log("CREATE USER ERROR", error);
+    throw error;
   }
 }

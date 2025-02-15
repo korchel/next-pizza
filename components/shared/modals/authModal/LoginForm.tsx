@@ -27,6 +27,9 @@ export const LoginForm: FC<Props> = ({ close }) => {
         ...data,
         redirect: false,
       });
+      if (response?.status === 401) {
+        throw new Error();
+      }
       if (!response?.ok) {
         throw Error();
       }

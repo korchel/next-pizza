@@ -40,7 +40,12 @@ export const RegisterForm: React.FC<Props> = ({ close }) => {
       close();
     } catch (error) {
       console.error("REGISTRATION ERROR", error);
-      return toast.error("Неверный E-Mail или пароль", {
+      if (error === "Error: User already exists") {
+        return toast.error("Такой пользователь уже существует", {
+          icon: "❌",
+        });
+      }
+      return toast.error("Регистрация не выполнена", {
         icon: "❌",
       });
     }
