@@ -20,7 +20,7 @@ import {
 import { cn } from "@/shared/lib";
 import { createOrder } from "@/app/actions";
 import { api } from "@/shared/services/apiClient";
-import { Container, Title } from "@/components/ui";
+import { Title } from "@/components/ui";
 
 export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
@@ -79,7 +79,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <Container>
+    <>
       <Title text="Заказ" size="lg" className="font-extrabold mb-8" />
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -107,6 +107,6 @@ export default function CheckoutPage() {
           </div>
         </form>
       </FormProvider>
-    </Container>
+    </>
   );
 }

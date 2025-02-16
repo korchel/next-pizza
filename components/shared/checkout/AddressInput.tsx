@@ -14,7 +14,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 export const AddressInput: React.FC<Props> = ({ className }) => {
   const [results, setResults] = useState<Record<string, string>[]>([]);
   const [isValueSet, setValueSet] = useState(false);
-  const { watch, setValue } = useFormContext();
+  const { watch, setValue, clearErrors } = useFormContext();
 
   const name = "address";
 
@@ -39,12 +39,13 @@ export const AddressInput: React.FC<Props> = ({ className }) => {
         required={true}
         autoComplete="nope"
         onChange={(e) => {
+          clearErrors(name);
           setValue(name, e.target.value);
           setValueSet(false);
         }}
       />
       {results.length > 0 && (
-        <div className="shadow-md bg-white rounded-md px-3 py-2 text-sm z-10 absolute top-14 max-h-40 overflow-auto">
+        <div className="shadow-md bg-white rounded-md px-3 py-2 text-sm z-10 absolute top-14 max-h-32 overflow-auto">
           {results.map((result, i) => (
             <div
               className="cursor-pointer py-1"
