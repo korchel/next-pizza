@@ -42,7 +42,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
         {left && (
           <ArrowButton
             direction="left"
-            className="absolute top-[105px]"
+            className="absolute top-1/2 -translate-y-1/2"
             onClick={() => scroll("left")}
           />
         )}
@@ -78,7 +78,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
         {right && (
           <ArrowButton
             direction="right"
-            className="absolute right-0 top-[105px]"
+            className="absolute right-0 top-1/2 -translate-y-1/2"
             onClick={() => scroll("right")}
           />
         )}
